@@ -25,7 +25,8 @@
                 request.setAttribute("msg","not successful");
             }
        %>
-       <form method="POST" action="">
+       <form method="POST" action="status.jsp">
+           Choose Preroid:<input type="text" name="peroid" maxlength="1"/>
            ENTER ABSENT NUMBERS:<textarea id="nums" name="nums" maxlength="10"></textarea>><br/>
            <br/>
            <input type="submit" title="submit">
