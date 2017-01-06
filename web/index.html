@@ -9,8 +9,12 @@ and open the template in the editor.
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <SCRIPT type="text/javascript">
+	window.history.forward();
+	function noBack() { window.history.forward(); }
+</SCRIPT>
     </head>
-    <body>
+    <body onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
         <form action="absents.jsp" method="post">
             USERNAME:<input type="text" id="uname" name="uname"/><br/>
             PASSWORD:<input type="password" id="pwd" name="pwd"/><br/>
