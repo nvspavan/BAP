@@ -49,7 +49,6 @@
             for (int i = 1; i < 10; i++) {
                 try{
                     periodlist.add(Integer.parseInt(request.getParameter("p"+i)));
-                    out.print(Integer.parseInt(request.getParameter("p"+i))+",");
                     }
                 catch(Exception ex){
                     
@@ -60,7 +59,7 @@
                 out.print(periods[i]+",");
                     s.executeUpdate("update "+Class+" set p"+periods[i]+"=1 where Date='"+df.format(today)+"'");
             }
-            out.println("<b>Absents List:</b><br/>");
+            out.println("<br/><b>Absents List:</b><br/>");
             for (int i = 0; i < rollnostr.length; i++) {
                 int rollNO=Integer.parseInt(rollnostr[i]);
                 rs=s.executeQuery("select * from bec_student where RollNo='"+rollNO+"'");
@@ -99,7 +98,6 @@
                     rollnos+=rollnostr[i];
                 int rollNO=Integer.parseInt(rollnostr[i]);
             }
-                out.print(rollnos);
                 rs=s.executeQuery("select * from bec_student where RollNo NOT IN("+rollnos+")");
                 while(rs.next()){
                     out.println("Name:"+rs.getString(2));
