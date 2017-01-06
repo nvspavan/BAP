@@ -1,7 +1,8 @@
 <%-- 
     Document   : Login
     Created on : 5 Jan, 2017, 12:07:07 PM
-    Author     : phaneendraN
+    Author     : Mahidhar reddy
+    Staff 
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -14,10 +15,10 @@
     <body>
        <% 
            String uname =  request.getParameter("uname"); 
-           String pwd=request.getParameter("pwd");
+           String pwd = request.getParameter("pwd");
             if(uname.matches("staff_test") && pwd.matches("staff_test"))
             {
-                out.println("successful");
+                out.println("Login successful");
             }else
             {
                 out.println("not successful");
@@ -26,8 +27,8 @@
             }
        %>
        <form method="POST" action="status.jsp">
-           Choose Preroid:<input type="text" name="peroid" maxlength="1"/>
-           ENTER ABSENT NUMBERS:<textarea id="nums" name="nums" maxlength="10"></textarea>><br/>
+           Choose Peroid:<input type="text" name="peroid" maxlength="1"/>
+           ENTER ABSENT NUMBERS:<textarea id="nums" name="nums"></textarea><br/>
            <br/>
            <input type="submit" title="submit">
        </form>  
