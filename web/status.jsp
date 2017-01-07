@@ -64,15 +64,22 @@
                     s.executeUpdate("update "+Class+" set p"+periods[i]+"="+StaffID+" where Date='"+df.format(today)+"'");
             }
             out.println("<br/><b>Absents List:</b><br/>");
+            %>
+            <table border="1">
+                <tr>
+                    <th>Name</th>
+                    <th>Reg_Num</th>
+                    <th>Roll No</th>
+                </tr>
+            <%
             for (int i = 0; i < rollnostr.length; i++) {
                 int rollNO=Integer.parseInt(rollnostr[i]);
                 rs=s.executeQuery("select * from bec_student where RollNo='"+rollNO+"' and classDetails_id="+ClassID);
                 while(rs.next()){
-                    out.println("Name:"+rs.getString(2));
+                    out.println("<tr><td>"+rs.getString(2)+"</td>");
                     String reg_num=rs.getString(3).trim();
-                    out.println("<br/>Reg_Num:"+reg_num );
-                    out.println("<br/>RollNO:"+rs.getInt(4));
-                    out.println("<br/>");
+                    out.println("<td>"+reg_num+"</td>");
+                    out.println("<td>"+rs.getInt(4)+"</td></tr>");
                     Statement stmt=con.createStatement();
                     int update=0;
                     try{
@@ -90,10 +97,19 @@
                             stmt.executeUpdate("update "+reg_num+" set p"+periods[j]+"=0 where Date='"+df.format(today)+"'");
                         }
                     }
-                out.println("");
+                    out.println("");
                 }
+                rs.close();
             }
-            out.println("<b>Present List:</b><br/>");
+            %>
+                </table><b>Present List:</b><br/>
+                <table border='1'>
+                    <tr>
+                        <th>Name</th>
+                        <th>Reg_Num</th>
+                        <th>Roll No</th>
+                    </tr>
+            <%
             String rollnos="";
             for (int i = 0; i < rollnostr.length; i++) {
                 if(i!=rollnostr.length-1)
@@ -104,11 +120,10 @@
             }
                 rs=s.executeQuery("select * from bec_student where RollNo NOT IN("+rollnos+") and classDetails_id="+ClassID);
                 while(rs.next()){
-                    out.println("Name:"+rs.getString(2));
+                    out.println("<tr><td>"+rs.getString(2)+"</td>");
                     String reg_num=rs.getString(3).trim();
-                    out.print("<br/>Reg_Num:"+reg_num );
-                    out.print("<br/>RollNO:"+rs.getInt(4));
-                    out.print("<br/>");
+                    out.println("<td>"+reg_num+"</td>");
+                    out.println("<td>"+rs.getInt(4)+"</td></tr>");
                     Statement stmt=con.createStatement();
                     int update=0;
                     try{
@@ -127,10 +142,14 @@
                         }
                     }
                 }
+                rs.close();
             }
-catch(Exception ex){
-    out.print(ex.getMessage());
-}
-     %>  
+            catch(Exception ex){
+                out.print(ex.getMessage());
+            } finally{
+                con.close();
+            }
+     %>
+     </table>
     </body>
 </html>

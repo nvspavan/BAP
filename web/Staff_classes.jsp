@@ -93,6 +93,7 @@
                                     }
                                 }
                         }
+                        rs.close();
                         if(count==0){
                             for (int i = 1; i < 10; i++) {
                                     %>
@@ -106,6 +107,7 @@
         <%    
                 }   
             }
+            con.close();
         %>
         </div>
         <br/><br/>
