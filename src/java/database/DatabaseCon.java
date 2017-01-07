@@ -48,4 +48,20 @@ public class DatabaseCon {
               "UNIQUE KEY id_UNIQUE (id)"+
             ") AUTO_INCREMENT=2 DEFAULT CHARSET=utf8";
     }
+    public String CreateClassTable(String ClassName){
+        return "CREATE TABLE "+ClassName+"(id int(11) NOT NULL AUTO_INCREMENT,"+
+              "Date varchar(10) DEFAULT NULL,"+
+              "p1 int(11) DEFAULT '0',"+
+              "p2 int(11) DEFAULT '0',"+
+              "p3 int(11) DEFAULT '0',"+
+              "p4 int(11) DEFAULT '0',"+
+              "p5 int(11) DEFAULT '0',"+
+              "p6 int(11) DEFAULT '0',"+
+              "p7 int(11) DEFAULT '0',"+
+              "p8 int(11) DEFAULT '0',"+
+              "p9 int(11) DEFAULT '0',"+
+              "PRIMARY KEY (id),"+
+              "UNIQUE KEY id_UNIQUE (id)"+
+            ") AUTO_INCREMENT=2 DEFAULT CHARSET=utf8";
+    }
 }

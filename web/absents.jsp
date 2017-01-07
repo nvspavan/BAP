@@ -25,19 +25,6 @@
 </SCRIPT>
     </head>
     <body onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
-       <% 
-           String uname =  request.getParameter("uname"); 
-           String pwd = request.getParameter("pwd");
-            if(uname.matches("staff_test") && pwd.matches("staff_test"))
-            {
-                out.println("Login successful");
-            }else
-            {
-                out.println("not successful");
-                //response.sendRedirect("index.html");
-                request.setAttribute("msg","not successful");
-            }
-       %>
        <form method="POST" action="status.jsp">
            <% Date dt = new Date();
                 SimpleDateFormat ft = 
@@ -55,7 +42,7 @@
             try{
                 rs= stmt.executeQuery("select * from "+Class+" where Date='"+df.format(today)+"'");
             }catch(Exception ex){
-                stmt.executeUpdate(DB.getCreateStmt(Class));
+                stmt.executeUpdate(DB.CreateClassTable(Class));
                 rs= stmt.executeQuery("select * from "+Class+" where Date='"+df.format(today)+"'");
             }
             int count=0;

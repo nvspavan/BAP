@@ -38,8 +38,12 @@
         String pass = "a085a02d";*/
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         java.util.Date today = Calendar.getInstance().getTime();
-        try{   
-            String Class="4CSEA";
+        try{ 
+            int StaffID=Integer.parseInt(session.getAttribute("StaffID").toString());
+            String[] classDetails=session.getAttribute("classDetails").toString().split("_");
+            int ClassID=Integer.parseInt(classDetails[0]);
+            String Class=classDetails[1];
+            out.print(Class);
             con = DB.getConnection();
             s=con.createStatement();
             String str=request.getParameter("nums");
@@ -57,12 +61,12 @@
             Integer[] periods = periodlist.toArray(new Integer[periodlist.size()]);
             for (int i = 0; i < periods.length; i++) {
                 out.print(periods[i]+",");
-                    s.executeUpdate("update "+Class+" set p"+periods[i]+"=1 where Date='"+df.format(today)+"'");
+                    s.executeUpdate("update "+Class+" set p"+periods[i]+"="+StaffID+" where Date='"+df.format(today)+"'");
             }
             out.println("<br/><b>Absents List:</b><br/>");
             for (int i = 0; i < rollnostr.length; i++) {
                 int rollNO=Integer.parseInt(rollnostr[i]);
-                rs=s.executeQuery("select * from bec_student where RollNo='"+rollNO+"'");
+                rs=s.executeQuery("select * from bec_student where RollNo='"+rollNO+"' and classDetails_id="+ClassID);
                 while(rs.next()){
                     out.println("Name:"+rs.getString(2));
                     String reg_num=rs.getString(3).trim();
@@ -98,7 +102,7 @@
                     rollnos+=rollnostr[i];
                 int rollNO=Integer.parseInt(rollnostr[i]);
             }
-                rs=s.executeQuery("select * from bec_student where RollNo NOT IN("+rollnos+")");
+                rs=s.executeQuery("select * from bec_student where RollNo NOT IN("+rollnos+") and classDetails_id="+ClassID);
                 while(rs.next()){
                     out.println("Name:"+rs.getString(2));
                     String reg_num=rs.getString(3).trim();
