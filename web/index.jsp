@@ -1,18 +1,33 @@
+<%-- 
+    Document   : index
+    Created on : 8 Jan, 2017, 11:12:51 AM
+    Author     : Rohith Reddy
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html >
 <head>
-  <meta charset="UTF-8">
-  <title></title>
-  <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-  <link rel="stylesheet" href="css/style.css">
-
-  
-</head>
-
-<body>
+    <meta charset="UTF-8">
+    <title></title>
+    <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <SCRIPT type="text/javascript">
+        window.history.forward();
+        function noBack() { window.history.forward(); }
+    </SCRIPT>
+    </head>
+    <body onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
   <div class="form">
-      
+      <%
+        if(session.getAttribute("HODID")!=null){
+            response.sendRedirect("HOD_Classes.jsp");
+        }
+        if(session.getAttribute("StaffID")!=null){
+            response.sendRedirect("Staff_classes.jsp");
+        }
+      %>
       <ul class="tab-group">
         <li class="tab active"><a href="#signup">Login As HOD </a></li>
         <li class="tab"><a href="#login">Log In As Staff</a></li>
@@ -77,7 +92,8 @@
 </div> <!-- /form -->
   <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 
-    <script src="js/index.js"></script>
+  <script src="js/index.js"></script>
 
 </body>
 </html>
+

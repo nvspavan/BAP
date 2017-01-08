@@ -22,7 +22,7 @@
                login_as="hod";
            }
            else{
-               //response.sendRedirect("index.html");
+               //response.sendRedirect("index.jsp");
            }
            String uname =  request.getParameter("uname"); 
            String pwd = request.getParameter("pwd");
@@ -31,7 +31,7 @@
            int ID=Login.LoginValidate(uname, pwd, login_as);
            if(login_as.matches("staff")){
                 if(ID==0){
-                    response.sendRedirect("index.html");
+                    response.sendRedirect("index.jsp");
                 }
                 else{
                     session.setAttribute("StaffID", ID);
@@ -40,14 +40,15 @@
            }
            else if(login_as.matches("hod")){
                 if(ID==0){
-                    response.sendRedirect("index.html");
+                    response.sendRedirect("index.jsp");
                 }
                 else{
                     session.setAttribute("HODID", ID);
+                    response.sendRedirect("HOD_Classes.jsp");
                 }
            }
            else{
-               response.sendRedirect("index.html");
+               response.sendRedirect("index.jsp");
            }
        %>
     </body>

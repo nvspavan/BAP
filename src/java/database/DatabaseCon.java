@@ -23,6 +23,10 @@ public class DatabaseCon {
             String url= "localhost/bec";
             String id= "root";
             String pass = "admin";
+            // Remember to change the next line with your own environment 
+            /* String url= "ap-cdbr-azure-southeast-b.cloudapp.net/bap";
+            String id= "bf099cfd7e031b";
+            String pass = "a085a02d"; */
             try {
                 Class.forName("com.mysql.jdbc.Driver");
                 Connection con=DriverManager.getConnection("jdbc:mysql://"+url,id,pass);

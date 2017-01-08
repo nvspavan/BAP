@@ -30,12 +30,6 @@
         java.sql.Statement s=null;
         java.sql.ResultSet rs=null,rs1=null;
         java.sql.PreparedStatement pst=null;
-
-        // Remember to change the next line with your own environment 
-        /* String url= 
-        "ap-cdbr-azure-southeast-b.cloudapp.net/bap";
-        String id= "bf099cfd7e031b";
-        String pass = "a085a02d";*/
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         java.util.Date today = Calendar.getInstance().getTime();
         try{ 
@@ -118,37 +112,38 @@
                     rollnos+=rollnostr[i];
                 int rollNO=Integer.parseInt(rollnostr[i]);
             }
-                rs=s.executeQuery("select * from bec_student where RollNo NOT IN("+rollnos+") and classDetails_id="+ClassID);
-                while(rs.next()){
-                    out.println("<tr><td>"+rs.getString(2)+"</td>");
-                    String reg_num=rs.getString(3).trim();
-                    out.println("<td>"+reg_num+"</td>");
-                    out.println("<td>"+rs.getInt(4)+"</td></tr>");
-                    Statement stmt=con.createStatement();
-                    int update=0;
-                    try{
-                        for (int j  = 0; j < periods.length; j++) {
-                            update=stmt.executeUpdate("update "+reg_num+" set p"+periods[j]+"=1 where Date='"+df.format(today)+"'");
-                            if(update==0){
-                             int insert=stmt.executeUpdate("insert into "+reg_num+"(Date,p"+periods[j]+") values('"+df.format(today)+"',1)");
-                            }
-                        }
-                    }
-                    catch(Exception e){
-                        stmt.execute(DB.getCreateStmt(reg_num));
-                        stmt.execute("insert into "+reg_num+"(Date) values('"+df.format(today)+"')");
+            rs=s.executeQuery("select * from bec_student where RollNo NOT IN("+rollnos+") and classDetails_id="+ClassID);
+            while(rs.next()){
+                out.println("<tr><td>"+rs.getString(2)+"</td>");
+                String reg_num=rs.getString(3).trim();
+                out.println("<td>"+reg_num+"</td>");
+                out.println("<td>"+rs.getInt(4)+"</td></tr>");
+                Statement stmt=con.createStatement();
+                int update=0;
+                try{
                     for (int j  = 0; j < periods.length; j++) {
-                            stmt.executeUpdate("update "+reg_num+" set p"+periods[j]+"=1 where Date='"+df.format(today)+"'");
+                        update=stmt.executeUpdate("update "+reg_num+" set p"+periods[j]+"=1 where Date='"+df.format(today)+"'");
+                        if(update==0){
+                         int insert=stmt.executeUpdate("insert into "+reg_num+"(Date,p"+periods[j]+") values('"+df.format(today)+"',1)");
                         }
                     }
                 }
-                rs.close();
+                catch(Exception e){
+                    stmt.execute(DB.getCreateStmt(reg_num));
+                    stmt.execute("insert into "+reg_num+"(Date) values('"+df.format(today)+"')");
+                for (int j  = 0; j < periods.length; j++) {
+                        stmt.executeUpdate("update "+reg_num+" set p"+periods[j]+"=1 where Date='"+df.format(today)+"'");
+                    }
+                }
             }
-            catch(Exception ex){
-                out.print(ex.getMessage());
-            } finally{
-                con.close();
-            }
+            rs.close();
+            con.close();
+        }
+        catch(Exception ex){
+            out.print(ex.getMessage());
+        } finally{
+            
+        }
      %>
      </table>
     </body>
