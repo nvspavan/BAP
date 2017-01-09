@@ -4,7 +4,6 @@
     Author     : Mahidhar reddy
 --%>
 
-<%@page import="com.sun.imageio.plugins.common.I18N"%>
 <%@page import="java.text.DateFormat"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -25,21 +24,26 @@
          <%@page import="java.text.SimpleDateFormat" %>
          <jsp:useBean id="DB" class="database.DatabaseCon"/>
      <% 
-
-        java.sql.Connection con=null;
-        java.sql.Statement s=null;
-        java.sql.ResultSet rs=null,rs1=null;
+        
+        Connection con=null;
+        Statement s=null;
+        ResultSet rs=null,rs1=null;
         java.sql.PreparedStatement pst=null;
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         java.util.Date today = Calendar.getInstance().getTime();
         try{ 
             int StaffID=Integer.parseInt(session.getAttribute("StaffID").toString());
             String[] classDetails=session.getAttribute("classDetails").toString().split("_");
-            int ClassID=Integer.parseInt(classDetails[0]);
             String Class=classDetails[1];
+            int ClassID=0;
             out.print(Class);
             con = DB.getConnection();
             s=con.createStatement();
+            int year=Integer.parseInt(Class.valueOf(Class.charAt(0)));
+            ResultSet r=s.executeQuery("select * from bec_class where year="+year+" and dept_Name_id=1 and section='"+Class.charAt(Class.length()-1)+"'");
+            while(r.next()){
+                ClassID=r.getInt(1);
+            }
             String str=request.getParameter("nums");
             String[] rollnostr=str.split(",");
             ArrayList<Integer> periodlist=new ArrayList <Integer>();
