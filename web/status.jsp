@@ -4,7 +4,6 @@
     Author     : Mahidhar reddy
 --%>
 
-<%@page import="com.sun.imageio.plugins.common.I18N"%>
 <%@page import="java.text.DateFormat"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -12,9 +11,13 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+       
+
         <SCRIPT type="text/javascript">
 	window.history.forward();
 	function noBack() { window.history.forward(); }
+        function print1() {
+        window.print();}
        
 </SCRIPT>
     </head>
@@ -25,21 +28,26 @@
          <%@page import="java.text.SimpleDateFormat" %>
          <jsp:useBean id="DB" class="database.DatabaseCon"/>
      <% 
-
-        java.sql.Connection con=null;
-        java.sql.Statement s=null;
-        java.sql.ResultSet rs=null,rs1=null;
+        
+        Connection con=null;
+        Statement s=null;
+        ResultSet rs=null,rs1=null;
         java.sql.PreparedStatement pst=null;
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         java.util.Date today = Calendar.getInstance().getTime();
         try{ 
             int StaffID=Integer.parseInt(session.getAttribute("StaffID").toString());
             String[] classDetails=session.getAttribute("classDetails").toString().split("_");
-            int ClassID=Integer.parseInt(classDetails[0]);
             String Class=classDetails[1];
+            int ClassID=0;
             out.print(Class);
             con = DB.getConnection();
             s=con.createStatement();
+            int year=Integer.parseInt(Class.valueOf(Class.charAt(0)));
+            ResultSet r=s.executeQuery("select * from bec_class where year="+year+" and dept_Name_id=1 and section='"+Class.charAt(Class.length()-1)+"'");
+            while(r.next()){
+                ClassID=r.getInt(1);
+            }
             String str=request.getParameter("nums");
             String[] rollnostr=str.split(",");
             ArrayList<Integer> periodlist=new ArrayList <Integer>();
@@ -57,9 +65,9 @@
                 out.print(periods[i]+",");
                     s.executeUpdate("update "+Class+" set p"+periods[i]+"="+StaffID+" where Date='"+df.format(today)+"'");
             }
-            out.println("<br/><b>Absents List:</b><br/>");
+            out.println("<br/><b style=\"color: #179b77\">Absents List:</b><br/>");
             %>
-            <table border="1">
+            <table border="1"  style="border-color: #179b77">
                 <tr>
                     <th>Name</th>
                     <th>Reg_Num</th>
@@ -96,8 +104,8 @@
                 rs.close();
             }
             %>
-                </table><b>Present List:</b><br/>
-                <table border='1'>
+                </table><b style="color: #179b77">Present List:</b><br/>
+                <table border='1' style="border-color: #179b77" >
                     <tr>
                         <th>Name</th>
                         <th>Reg_Num</th>
@@ -145,6 +153,8 @@
             
         }
      %>
+     
      </table>
-    </body>
+     <input type="button" onclick="print1();" value="Print" style="background-color: #179b77"/>
+   
 </html>
