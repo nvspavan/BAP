@@ -21,14 +21,19 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Classes</title>
-        
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+
+  <link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900|RobotoDraft:400,100,300,500,700,900'>
+<link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
+
+        <link rel="stylesheet" href="css/newcss.css">
         <SCRIPT type="text/javascript">
             window.history.forward();
             function noBack() { window.history.forward(); }
         </SCRIPT>
     </head>
-    <body onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
-        <div class="form">
+    <body onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="" class="module form-module">
+        <div class="module form-module">
             <form action="Staff_classes.jsp" method="post">
         <% 
             Connection con=DB.getConnection();
@@ -53,9 +58,11 @@
                     currDate=session.getAttribute("currDate").toString();
             prevDate=DS.prevWorkingDay(todayDate);
         %>
-            <input type="submit" name="currDate" value="<%=prevDate%>"/>
-            <input type="submit" name="currDate" value="<%=todayDate%>"/>
-            <input name="logout" type="submit" value="Logout"/>
+             Yesterday: <input type="submit" name="currDate" value="<%=prevDate%>"/>
+             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input name="logout" type="submit" value="Logout"/><br/>
+           Today: <input type="submit" name="currDate" value="<%=todayDate%>"/><br/>
+           
         <%
             
             Date myDate = null;
@@ -88,8 +95,9 @@
                     response.sendRedirect("index.jsp");
                 else{
         %>
-           
-            <ul class="tab-group">
+           <br/>
+           Please Select Your Section:
+            <ul class="module form-module">
                 <%
                     int StaffID=Integer.parseInt(session.getAttribute("StaffID").toString());
                     ResultSet rs=st.executeQuery("SELECT d.class_name_id,d.Subject_Name,c.year,h.Dept_Name,c.section FROM bec.bec_dealingclass as d join bec.bec_class as c on d.class_name_id=c.id join bec.bec_hod as h on c.Dept_Name_id=h.id where d.staff_name_id="+StaffID+"");
@@ -100,7 +108,7 @@
                         String classDet=rs.getInt(3)+rs.getString(4)+rs.getString(5);
                         ButtonIDs.add(classid+"_"+classDet);
                 %>
-        <li class="tab"><input type="submit" name="MyClasses" value="<%= sub+"_"+classDet %>"/></li>
+        <li class="module form-module"><input type="submit" name="MyClasses" value="<%= sub+"_"+classDet %>"/></li>
                 <%
                         out.print("<br/><br/>");
                     }
@@ -109,10 +117,10 @@
                         if(request.getParameter("MyClasses")!=null){
                 %>
       </ul>
-       <div class="">
+       <div class="module form-module">
         <div id="signup">   	
-            <div class="field-wrap">
-                Choose Period:
+            <div class="module form-module">
+                Choose Period for section:
                         <% 
                             String Class=request.getParameter("MyClasses").split("_")[1];
                             out.print(Class);
@@ -142,7 +150,7 @@
                         %>
                         <div class="checkbox">
                             <div class="tag"></div>
-                            <input type="checkbox" <%if(todayclasses[i]==StaffID)out.println("checked");%> class="input-assumpte" id="input-confidencial1" name="p<%=i%>" value = "<%=i%>"><label for="input-confidencial1"><%=i%></label><br/>
+                            <input type="checkbox" <%if(todayclasses[i]==StaffID)out.println("checked");%>  id="input-confidencial1" name="p<%=i%>" value = "<%=i%>"><label for="input-confidencial1"><%=i%></label><br/>
                         <%
                                     }
                                 }
@@ -151,7 +159,7 @@
                             if(count==0){
                                 for (int i = 1; i < 10; i++) {
                                         %>
-                                        <input type="checkbox" class="input-assumpte" id="input-confidencial2" name="p<%=i%>" value = "<%=i%>"><label for="input-confidencial1"><%=i%></label><br/>
+                                        <input type="checkbox"  id="input-confidencial2" name="p<%=i%>" value = "<%=i%>"><label for="input-confidencial1"><%=i%></label><br/>
                                         <%
                                     }
                                 stmt.executeUpdate("insert into "+Class+"(Date) values('"+currDate+"')");
@@ -167,7 +175,8 @@
 %>
         </div>
         <br/><br/>
-           <p> Please specify absenties list in comma sepeated values</p>
+        <div class="module form-module">
+        <p > Please specify absenties list in comma sepeated values</p>
            <textarea id="nums" name="nums"></textarea><br/>
            <br/>
            <input name="absentsSubmit" type="submit" title="submit">

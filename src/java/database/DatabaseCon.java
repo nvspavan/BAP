@@ -22,7 +22,7 @@ public class DatabaseCon {
         {
             String url= "localhost/bec";
             String id= "root";
-            String pass = "admin";
+            String pass = "toor";
             // Remember to change the next line with your own environment 
             /* String url= "ap-cdbr-azure-southeast-b.cloudapp.net/bap";
             String id= "bf099cfd7e031b";
