@@ -82,7 +82,7 @@
           <!--<p class="forgot"><a href="#">Forgot Password?</a></p>-->
           
           <button class="button button-block" id="staff" name="staff"/>Log In</button>
-          
+          <a href="forgotPassword.jsp">Having trouble signing in?</a>
           </form>
 
         </div>

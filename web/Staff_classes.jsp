@@ -69,7 +69,7 @@
                     currDate=session.getAttribute("currDate").toString();
             prevDate=DS.prevWorkingDay(todayDate);
         %>
-             Yesterday: <input type="submit" name="currDate" value="<%=prevDate%>"/>
+             Previous Day: <input type="submit" name="currDate" value="<%=prevDate%>"/>
              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <input name="logout" type="submit" value="Logout"/><br/>
            Today: <input type="submit" name="currDate" value="<%=todayDate%>"/><br/>
@@ -84,7 +84,7 @@
                 myDate=null;
             }
             dayOfWeek=dWF.format(myDate);
-            out.print(dayOfWeek+" ");//Day of the Week
+            out.print("Selected Date:"+dayOfWeek+" ");//Day of the Week
             out.print(currDate+"<br/>");//Current Selected Date
             boolean Holiday=false;
             if(dayOfWeek.equalsIgnoreCase("sun")){

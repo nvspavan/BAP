@@ -19,7 +19,7 @@
 <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
 
         <link rel="stylesheet" href="css/newcss.css">
-       
+       <link rel="stylesheet" href="css/newcss1.css"/>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
         <jsp:useBean id="DB" class="database.DatabaseCon"/>
@@ -41,12 +41,7 @@
     border-radius: 5px;
     color: white;
     font-weight: bold;
-    
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  margin-top: -50px;
-  margin-left: -100px;
+
 }
 
             </style>
@@ -54,7 +49,7 @@
     </head>
     <body  onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
         <a class="button" href="HOD_Classes.jsp">Back</a>
-        <table class="module form-module" border="1">
+        <table class="table2" border="1">
             <tr >
                 <th>ID</th>
                 <th>Date</th>

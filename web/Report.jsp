@@ -18,7 +18,7 @@
 <html>
 <head>
      
-       
+<link rel="stylesheet" href="css/newcss1.css"/>     
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
@@ -58,10 +58,10 @@
         //out.print(str+"__"+request.getParameter("toDate"));
         rs=stmt.executeQuery("select year,SECTION from bec_class where Dept_Name_id="+HODID);
     %>
-    <form  class="module form-module" action="Report.jsp" method="post">
-        From Date:<input id="datepicker1" placeholder="mm/dd/yyyy" name="fromDate" value="<%=(request.getParameter("fromDate")==null)?new String():request.getParameter("fromDate")%>"/><br/>
-    To Date:<input id="datepicker2" name="toDate" placeholder="mm/dd/yyyy" value="<%=(request.getParameter("toDate")==null)?new String():request.getParameter("toDate")%>"/>
-    <select style="background-color: #33b5e5" name="sltClass">
+    <form   action="Report.jsp" method="post">
+        <p style="color: #333; font-family: 'Muli', sans-serif; margin-bottom: 15px;" >From Date:<input id="datepicker1" placeholder="mm/dd/yyyy" name="fromDate" value="<%=(request.getParameter("fromDate")==null)?new String():request.getParameter("fromDate")%>"/></p><br/>
+        <p style="color: #333; font-family: 'Muli', sans-serif; margin-bottom: 15px;" >To Date:<input id="datepicker2" name="toDate" placeholder="mm/dd/yyyy" value="<%=(request.getParameter("toDate")==null)?new String():request.getParameter("toDate")%>"/></p>
+    <select style="color: #333; font-family: 'Muli', sans-serif; margin-bottom: 15px;" name="sltClass">
         <option value="Class">--Select--</option>
         <%
             while(rs.next()){
@@ -72,9 +72,21 @@
             }
         %>
     </select>
+        <style>
+         .button {
+    display: block;
+    width: 115px;
+    height: 25px;
+    background: #80ff80;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    
+  
+    }</style>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <input type="submit" value="submit"/>
+    <input class="button" type="submit" value="submit"/>
     <%
         if("POST".equalsIgnoreCase(request.getMethod()) && (request.getRequestURI() != null && request.getRequestURI().toString().equalsIgnoreCase("/BAP/Report.jsp")))
         if(request.getParameter("fromDate")==null){

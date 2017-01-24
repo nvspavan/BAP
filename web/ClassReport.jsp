@@ -1,10 +1,13 @@
+<%@page import="com.sun.javafx.scene.control.skin.VirtualFlow.ArrayLinkedList"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
 
-<table border='1'>
+<table class="table1" border='1'>
             <tr>
                 <th>Roll NO</th>
+                <th>Register No</th>
                 <th>Name</th>
+                <th>Phone Numbers</th>
                 <%
                     List<String> subjects=new ArrayList<String>();
                     List<Integer> staffIDs=new ArrayList<Integer>();
@@ -87,30 +90,35 @@
                        
                    }
                    int index=0;
-                   int Mytotal=0;
+                   int Gtotal1=0,Gtotal2=0;
                    for (String subject:subjects) {
                         out.print("<th>"+subject+"<br/>"+total[0][index]);
                         if(subject.contains("LAB")){
                             out.print("/"+total[1][index]);
                         }
                         out.print("</th>");
-                        Mytotal+=total[0][index];
+                        Gtotal1+=total[0][index];
+                        Gtotal2+=total[1][index];
                         index++;
                    }
                 %>
-                <th>Total<br/><%=Mytotal%></th>
+                <th>Total<br/><%=Gtotal1%></th>
                 <th>Percentage</th>
             </tr>
                 <%
                    List<String> Names=new ArrayList<String>();
                    List<Integer> RollNos=new ArrayList<Integer>();
                    List<String> RegNos=new ArrayList<String>();
+                   List<String> Phonos=new ArrayList<String>();
+                   List<Integer> Batchs=new ArrayList<Integer>();
                    //List<String> Phonenos=new ArrayList<String>();
                    rs=stmt.executeQuery("SELECT * FROM bec.bec_student join bec.bec_class on bec_student.classDetails_id=bec_class.id where bec_class.section='"+currClass.charAt(1)+"' and bec_class.year="+currClass.charAt(0));
                    while(rs.next()){
                        Names.add(rs.getString(2));
                        RegNos.add(rs.getString(3));
                        RollNos.add(rs.getInt(4));
+                       Batchs.add(rs.getInt(6));
+                       Phonos.add(rs.getString(7));
                    } 
                    int[][] presentTotal=new int[RegNos.size()][subjects.size()];
                    int regIdx=0,subindx=0;
@@ -133,13 +141,15 @@
                    }
                    for (int i = 0; i < regIdx; i++) {
                        int mytotal=0;
-                        out.print("<tr><td>"+RegNos.get(i)+"</td><td>"+Names.get(i)+"</td>");
+                        out.print("<tr><td>"+RollNos.get(i)+"</td><td>"+RegNos.get(i)+"</td><td>"+Names.get(i)+"</td><td>"+Phonos.get(i)+"</td>");
                            for (int j = 0; j < subindx; j++) {
                                     mytotal+=presentTotal[i][j];
                                    out.print("<td>"+presentTotal[i][j]+"</td>");
                                }
-                          
-                          out.print("<td>"+mytotal+"</td><td>"+(mytotal/(float)Mytotal)*100+"</td></tr>");
+                        //if(Batchs.get(i)==1)
+                            out.print("<td>"+mytotal+"</td><td>"+(mytotal/(float)(Gtotal1))*100+"</td></tr>");
+                        //else
+                          //out.print("<td>"+mytotal+"</td><td>"+(mytotal/(float)(Gtotal1+Gtotal2))*100+"</td></tr>");
                        }}
                 %>
             

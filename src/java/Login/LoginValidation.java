@@ -27,7 +27,7 @@ public class LoginValidation {
                 Connection con=db.getConnection();
                 Statement st=con.createStatement();
                 ResultSet rs=null;
-                if(login_as=="hod"||login_as=="staff"){
+                if(login_as=="hod"){
                      rs=st.executeQuery("select * from bec_"+login_as+" where Name='"+username+"'");
                 }
                 else

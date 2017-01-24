@@ -21,6 +21,7 @@
         window.print();}
        
 </SCRIPT>
+<link rel="stylesheet" href="css/newcss1.css"/>
     </head>
     <body onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
          <%@ page import="java.util.*" %>
@@ -28,7 +29,19 @@
          <%@ page import="java.sql.*"%>
          <%@page import="java.text.SimpleDateFormat" %>
          <jsp:useBean id="DB" class="database.DatabaseCon"/>
-         <a href="Staff_classes.jsp">Back</a>
+         <style>
+         .button {
+    display: block;
+    width: 115px;
+    height: 25px;
+    background: #333333;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    
+  
+    }</style>
+         <a class="button" href="Staff_classes.jsp">Back</a>
          
      <% 
         
@@ -54,7 +67,7 @@
             
             String Class=classDetails[1];
             int ClassID=0;
-            out.print(classDetails[0]+"_"+Class+"<br/>");
+            out.print("<p style=\"color: #333; font-family: 'Muli', sans-serif; margin-bottom: 15px;\">"+classDetails[0]+"_"+Class+"</p><br/>");
             con = DB.getConnection();
             s=con.createStatement();
             int year=Integer.parseInt(Class.valueOf(Class.charAt(0)));
@@ -66,11 +79,10 @@
             String[] rollnostr=str.split(",");
             ArrayList<Integer> periodlist=new ArrayList <Integer>();
             int[][] todayclass=(int[][])session.getAttribute("todayClasses");
-            out.print("Selected Periods:");
+            out.print("<p style=\"color: #333; font-family: 'Muli', sans-serif; margin-bottom: 15px;\" >Selected Periods:");
             for (int i = 1; i < 10; i++) {
                 try{
                     periodlist.add(Integer.parseInt(request.getParameter("p"+i)));
-                    
                     if(Batch==2){
                         if(todayclass[1][i]!=StaffID){
                             r=s.executeQuery("insert into bec_period_change_reason(Date, Reason, classDetails_id, staff_id) VALUES('"+DS.getSQLDate(currDate)+"','"+
@@ -94,17 +106,20 @@
                 }
             }
             Integer[] periods = periodlist.toArray(new Integer[periodlist.size()]);
+            int affected=0;
             for (int i = 0; i < periods.length; i++) {
                 out.print(periods[i]+",");
                 SqlQuery="update "+Class+" set p"+periods[i]+"="+StaffID+" where Date='"+DS.getSQLDate(currDate)+"'";
                 if(classDetails[0].contains("LAB")){
                     SqlQuery+=BatchQuery;
                 }
-                s.executeUpdate(SqlQuery);
+                affected+=s.executeUpdate(SqlQuery);
             }
+            //out.print("________"+affected+"_______"+periods.length);
+            if(affected==periods.length){
             out.println("<br/><b style=\"color: #179b77\">Absents List:</b><br/>");
             %>
-            <table border="1"  style="border-color: #179b77">
+            <table border="1"  class="table3"  style="border-color: #179b77">
                 <tr>
                     <th>Name</th>
                     <th>Reg_Num</th>
@@ -142,8 +157,8 @@
                 rs.close();
             }
             %>
-                </table><b style="color: #179b77">Present List:</b><br/>
-                <table border='1' style="border-color: #179b77" >
+                </table><b style="color: #333; font-family: 'Muli', sans-serif; margin-bottom: 15px;">Present List:</b><br/>
+                <table border='1' class="table3" style="border-color: #179b77" >
                     <tr>
                         <th>Name</th>
                         <th>Reg_Num</th>
@@ -183,6 +198,10 @@
             }
             rs.close();
             con.close();
+            }
+            else{
+                out.println("Already Updated");
+            }
         }
         catch(Exception ex){
             out.print(ex.getMessage());
@@ -192,6 +211,6 @@
      %>
      
      </table>
-     <input type="button" onclick="print1();" value="Print" style="background-color: #179b77"/>
+     <input type="button" class="button" onclick="print1();" value="Print" style="background-color: #179b77"/>
    
 </html>

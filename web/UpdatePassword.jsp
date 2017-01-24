@@ -25,7 +25,7 @@
                 Connection con=DB.getConnection();
                 Statement s=con.createStatement();
                 int no=s.executeUpdate("delete from forgotpassword where EmailID='"+email+"' and `Key`='"+Key+"'");
-                if(no>1){
+                if(no>0){
                     s.executeUpdate("update bec_staff_login set password='"+Login.getHash(Pass)+"' where username='"+email+"'");
                     out.println("Password Changed");
                 }

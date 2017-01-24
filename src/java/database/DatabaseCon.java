@@ -32,7 +32,7 @@ public class DatabaseCon {
             String pass = "a085a02d"; */
             try {
                 Class.forName("com.mysql.jdbc.Driver");
-                Connection con=DriverManager.getConnection("jdbc:mysql://"+url,id,pass);
+                Connection con=DriverManager.getConnection("jdbc:mysql://"+url+"?useAffectedRows=true",id,pass);
                 return con;           
             } catch (ClassNotFoundException | SQLException ex) {
                 Logger.getLogger(ex.getMessage());
@@ -58,7 +58,7 @@ public class DatabaseCon {
         }
         for (Iterator<String> iterator = subjects.iterator(); iterator.hasNext();) {
             String next = iterator.next();
-            sql+="`"+next+"` int(11) DEFAULT '-1',";
+            sql+="`"+next+"` int(11) DEFAULT '0',";
         }
         sql+="PRIMARY KEY (id),"+
               "UNIQUE KEY id_UNIQUE (id)"+
