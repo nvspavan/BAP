@@ -42,7 +42,8 @@
            
         <a class="button" href="Report.jsp">Reports</a>
         &nbsp;
-        <a class="button" href="CheckReason.jsp">Reasons</a>
+        <a class="button" href="CheckReason.jsp">Reasons</a>&nbsp;
+        <a class="button" href="Holidays.jsp">Add Holidays</a>
         <% 
             if ( "POST".equalsIgnoreCase(request.getMethod()) && (request.getRequestURI() != null && request.getRequestURI().toString().equalsIgnoreCase("/BAP/HOD_classes.jsp"))) {
                 if(request.getParameter("logout")!=null){

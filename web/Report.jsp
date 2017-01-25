@@ -18,7 +18,7 @@
 <html>
 <head>
      
-<link rel="stylesheet" href="css/newcss1.css"/>     
+<!--<link rel="stylesheet" href="css/newcss1.css"/>-->
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
@@ -59,9 +59,11 @@
         rs=stmt.executeQuery("select year,SECTION from bec_class where Dept_Name_id="+HODID);
     %>
     <form   action="Report.jsp" method="post">
-        <p style="color: #333; font-family: 'Muli', sans-serif; margin-bottom: 15px;" >From Date:<input id="datepicker1" placeholder="mm/dd/yyyy" name="fromDate" value="<%=(request.getParameter("fromDate")==null)?new String():request.getParameter("fromDate")%>"/></p><br/>
-        <p style="color: #333; font-family: 'Muli', sans-serif; margin-bottom: 15px;" >To Date:<input id="datepicker2" name="toDate" placeholder="mm/dd/yyyy" value="<%=(request.getParameter("toDate")==null)?new String():request.getParameter("toDate")%>"/></p>
-    <select style="color: #333; font-family: 'Muli', sans-serif; margin-bottom: 15px;" name="sltClass">
+        <p style="color: #333; font-family: 'Muli', sans-serif; margin-bottom: 15px;" >
+            From Date:<input id="datepicker1" placeholder="mm/dd/yyyy" name="fromDate" value="<%=(request.getParameter("fromDate")==null)?new String():request.getParameter("fromDate")%>"/></p><br/>
+        <p style="color: #333; font-family: 'Muli', sans-serif; margin-bottom: 15px;" >
+            To Date:<input id="datepicker2" name="toDate" placeholder="mm/dd/yyyy" value="<%=(request.getParameter("toDate")==null)?new String():request.getParameter("toDate")%>"/></p>
+    Section:<select style="color: #333; font-family: 'Muli', sans-serif; margin-bottom: 15px;" name="sltClass">
         <option value="Class">--Select--</option>
         <%
             while(rs.next()){
@@ -72,6 +74,13 @@
             }
         %>
     </select>
+        Percentage: <select name="percentage">
+            <option value="0">All</option>
+            <option value="90">&gt;90</option>
+            <option value="75">&gt;=75</option>
+            <option value="70">&lt;75 and &gt;=65</option>
+            <option value="65">below 65</option>
+        </select>
         <style>
          .button {
     display: block;

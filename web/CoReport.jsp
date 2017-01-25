@@ -17,7 +17,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="css/newcss1.css"/>
+    <!--<link rel="stylesheet" href="css/newcss1.css"/>-->
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
@@ -56,6 +56,13 @@
     <form action="CoReport.jsp" method="post">
         Form Date:<input id="datepicker1" name="fromDate" value="<%=(request.getParameter("fromDate")==null)?new String():request.getParameter("fromDate")%>"/>
         TO Date:<input id="datepicker2" name="toDate" value="<%=(request.getParameter("toDate")==null)?new String():request.getParameter("toDate")%>"/>
+        Percentage: <select name="percentage">
+            <option value="0">All</option>
+            <option value="90">&gt;90</option>
+            <option value="75">&gt;=75</option>
+            <option value="70">&lt;75 and &gt;=65</option>
+            <option value="65">below 65</option>
+        </select>
         <input type="submit" value="submit"/>
         <%
             if("POST".equalsIgnoreCase(request.getMethod()) && (request.getRequestURI() != null && request.getRequestURI().toString().equalsIgnoreCase("/BAP/CoReport.jsp")))

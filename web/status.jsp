@@ -21,7 +21,7 @@
         window.print();}
        
 </SCRIPT>
-<link rel="stylesheet" href="css/newcss1.css"/>
+    <!--<link rel="stylesheet" href="css/newcss1.css"/>-->
     </head>
     <body onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
          <%@ page import="java.util.*" %>

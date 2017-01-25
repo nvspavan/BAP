@@ -101,11 +101,26 @@
                         Gtotal2+=total[1][index];
                         index++;
                    }
+                   float percentage=Float.valueOf(request.getParameter("percentage"));
                 %>
                 <th>Total<br/><%=Gtotal1%></th>
-                <th>Percentage</th>
+                <th>Percentage<br/>(<%
+                    if(percentage==70){
+                        out.print("Between 75 and 65");
+                    }
+                    else if(percentage==65){
+                        out.print("Below 65");
+                    }
+                    else if(percentage==0){
+                        out.print("All");
+                    }
+                    else{
+                        out.print("Above "+percentage);
+                    }
+                %> )</th>
             </tr>
                 <%
+                    
                    List<String> Names=new ArrayList<String>();
                    List<Integer> RollNos=new ArrayList<Integer>();
                    List<String> RegNos=new ArrayList<String>();
@@ -141,15 +156,29 @@
                    }
                    for (int i = 0; i < regIdx; i++) {
                        int mytotal=0;
-                        out.print("<tr><td>"+RollNos.get(i)+"</td><td>"+RegNos.get(i)+"</td><td>"+Names.get(i)+"</td><td>"+Phonos.get(i)+"</td>");
-                           for (int j = 0; j < subindx; j++) {
-                                    mytotal+=presentTotal[i][j];
-                                   out.print("<td>"+presentTotal[i][j]+"</td>");
-                               }
-                        //if(Batchs.get(i)==1)
-                            out.print("<td>"+mytotal+"</td><td>"+(mytotal/(float)(Gtotal1))*100+"</td></tr>");
-                        //else
-                          //out.print("<td>"+mytotal+"</td><td>"+(mytotal/(float)(Gtotal1+Gtotal2))*100+"</td></tr>");
+                        for (int j = 0; j < subindx; j++) {
+                            mytotal+=presentTotal[i][j];
+                            //out.print("<td>"+presentTotal[i][j]+"</td>");
+                       }
+                        float my_per=(mytotal/(float)Gtotal1)*100;
+                        if(percentage==0||percentage==75||percentage==90){
+                            if(my_per>=percentage){
+                                out.print("<tr><td>"+RollNos.get(i)+"</td><td>"+RegNos.get(i)+"</td><td>"+Names.get(i)+"</td><td>"+Phonos.get(i)+"</td>");
+                                for (int j = 0; j < subindx; j++) out.print("<td>"+presentTotal[i][j]+"</td>");
+                                out.print("<td>"+mytotal+"</td><td>"+my_per+"</td></tr>");
+                            }
+                        }
+                        else if(percentage==70.0&&(my_per>=65&&my_per<75)){
+                            out.print("<tr><td>"+RollNos.get(i)+"</td><td>"+RegNos.get(i)+"</td><td>"+Names.get(i)+"</td><td>"+Phonos.get(i)+"</td>");
+                            for (int j = 0; j < subindx; j++) out.print("<td>"+presentTotal[i][j]+"</td>");
+                            out.print("<td>"+mytotal+"</td><td>"+my_per+"</td></tr>");
+                        }
+                        else if(percentage==65&&my_per<percentage){
+                            out.print("<tr><td>"+RollNos.get(i)+"</td><td>"+RegNos.get(i)+"</td><td>"+Names.get(i)+"</td><td>"+Phonos.get(i)+"</td>");
+                            for (int j = 0; j < subindx; j++) out.print("<td>"+presentTotal[i][j]+"</td>");
+                            out.print("<td>"+mytotal+"</td><td>"+my_per+"</td></tr>");
+                            
+                        }
                        }}
                 %>
             

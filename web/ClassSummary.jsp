@@ -43,11 +43,24 @@
     <body onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
         <a href="HOD_Classes.jsp">Back</a>
         <%=currClass%>
+        <form action="ClassSummary.jsp" method="post">
+            
+        Percentage: <select name="percentage">
+            <option value="0">All</option>
+            <option value="90">&gt;90</option>
+            <option value="75">&gt;=75</option>
+            <option value="70">&lt;75 and &gt;=65</option>
+            <option value="65">below 65</option>
+        </select>
+        <input type="submit" value="submit"/>
+        </form> 
         <table border='1'>
             <tr>
                 <th>Roll NO</th>
                 <th>Name</th>
                 <%
+                    float percentage=Float.valueOf((request.getParameter("percentage")==null)?"0":request.getParameter("percentage"));
+                    
                     List<String> subjects=new ArrayList<String>();
                     List<Integer> staffIDs=new ArrayList<Integer>();
                     rs=stmt.executeQuery("select * from bec_dealingclass join bec_class on bec_dealingclass.class_name_id=bec_class.id where bec_class.section='"+currClass.charAt(1)+"' and bec_class.year="+currClass.charAt(0));
@@ -118,7 +131,20 @@
                    }
                 %>
                 <th>Total<br/><%=Mytotal%></th>
-                <th>Percentage</th>
+                <th>Percentage<br/>(<%
+                    if(percentage==70){
+                        out.print("Between 75 and 65");
+                    }
+                    else if(percentage==65){
+                        out.print("Below 65");
+                    }
+                    else if(percentage==0){
+                        out.print("All");
+                    }
+                    else{
+                        out.print("Above "+percentage);
+                    }
+                %> )</th>
             </tr>
                 <%
                    List<String> Names=new ArrayList<String>();
@@ -152,14 +178,35 @@
                    }
                    for (int i = 0; i < regIdx; i++) {
                        int mytotal=0;
-                        out.print("<tr><td>"+RegNos.get(i)+"</td><td>"+Names.get(i)+"</td>");
-                           for (int j = 0; j < subindx; j++) {
-                                    mytotal+=presentTotal[i][j];
-                                   out.print("<td>"+presentTotal[i][j]+"</td>");
-                               }
-                          
-                          out.print("<td>"+mytotal+"</td><td>"+(mytotal/(float)Mytotal)*100+"</td></tr>");
+                       for (int j = 0; j < subindx; j++) {
+                            mytotal+=presentTotal[i][j];
                        }
+                       float my_per=(mytotal/(float)Mytotal)*100;
+                       if(percentage==0||percentage==75||percentage==90){
+                            if(my_per>=percentage){
+                                out.print("<tr><td>"+RegNos.get(i)+"</td><td>"+Names.get(i)+"</td>");   
+                                for (int j = 0; j < subindx; j++) out.print("<td>"+presentTotal[i][j]+"</td>");
+                                out.print("<td>"+mytotal+"</td><td>"+my_per+"</td></tr>");
+                            }
+                        }
+                        else if(percentage==70.0&&(my_per>=65&&my_per<75)){
+                            out.print("<tr><td>"+RegNos.get(i)+"</td><td>"+Names.get(i)+"</td>");   
+                            for (int j = 0; j < subindx; j++) out.print("<td>"+presentTotal[i][j]+"</td>");
+                            out.print("<td>"+mytotal+"</td><td>"+my_per+"</td></tr>");
+                        }
+                        else if(percentage==65&&my_per<percentage){
+                            out.print("<tr><td>"+RegNos.get(i)+"</td><td>"+Names.get(i)+"</td>");   
+                            for (int j = 0; j < subindx; j++) out.print("<td>"+presentTotal[i][j]+"</td>");
+                            out.print("<td>"+mytotal+"</td><td>"+my_per+"</td></tr>");
+                            
+                        }
+                       
+                       
+                       
+                       }
+                  
+                        
+                        
                 %>
             
         </table>
