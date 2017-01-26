@@ -44,7 +44,7 @@ CREATE TABLE `bec_class` (
 
 LOCK TABLES `bec_class` WRITE;
 /*!40000 ALTER TABLE `bec_class` DISABLE KEYS */;
-INSERT INTO `bec_class` VALUES (1,4,'A',1,1),(2,4,'B',1,1),(3,4,'C',1,1),(4,3,'A',1,1),(5,3,'B',1,1),(6,3,'C',1,1),(7,2,'A',1,1),(8,2,'B',1,1),(9,2,'C',1,1);
+INSERT INTO `bec_class` VALUES (1,4,'A',1,16),(2,4,'B',1,10),(3,4,'C',1,1),(4,3,'A',1,1),(5,3,'B',1,1),(6,3,'C',1,1),(7,2,'A',1,1),(8,2,'B',1,1),(9,2,'C',1,1);
 /*!40000 ALTER TABLE `bec_class` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -57,4 +57,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-01-08 16:24:40
+-- Dump completed on 2017-01-19 19:00:24

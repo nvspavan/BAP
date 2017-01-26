@@ -18,28 +18,35 @@ USE `bec`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `bec_holidays`
+-- Table structure for table `bec_period_change_reason`
 --
 
-DROP TABLE IF EXISTS `bec_holidays`;
+DROP TABLE IF EXISTS `bec_period_change_reason`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `bec_holidays` (
+CREATE TABLE `bec_period_change_reason` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `Date` date NOT NULL,
   `Reason` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
+  `classDetails_id` int(11) NOT NULL,
+  `staff_id` int(11) NOT NULL,
+  `Period` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `BEC_period_change_reaso_classDetails_id_61e92292_fk_BEC_class_id` (`classDetails_id`),
+  KEY `BEC_period_change_reason_staff_id_066e001f_fk_BEC_staff_id` (`staff_id`),
+  CONSTRAINT `BEC_period_change_reaso_classDetails_id_61e92292_fk_BEC_class_id` FOREIGN KEY (`classDetails_id`) REFERENCES `bec_class` (`id`),
+  CONSTRAINT `BEC_period_change_reason_staff_id_066e001f_fk_BEC_staff_id` FOREIGN KEY (`staff_id`) REFERENCES `bec_staff` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `bec_holidays`
+-- Dumping data for table `bec_period_change_reason`
 --
 
-LOCK TABLES `bec_holidays` WRITE;
-/*!40000 ALTER TABLE `bec_holidays` DISABLE KEYS */;
-INSERT INTO `bec_holidays` VALUES (2,'2017-01-16','Holiday'),(3,'2017-01-12','Holiday'),(6,'2017-01-19','Holiday'),(7,'2017-01-17','Holiday');
-/*!40000 ALTER TABLE `bec_holidays` ENABLE KEYS */;
+LOCK TABLES `bec_period_change_reason` WRITE;
+/*!40000 ALTER TABLE `bec_period_change_reason` DISABLE KEYS */;
+INSERT INTO `bec_period_change_reason` VALUES (1,'2017-01-18','null',2,5,0),(2,'2017-01-18','null',2,5,0),(3,'2017-01-18','null',2,5,0),(4,'2017-01-18','null',2,5,0),(5,'2017-01-18','Reason2',2,10,0),(6,'2017-01-18','Reason3',8,10,1),(7,'2017-01-18','Reason09',2,31,7);
+/*!40000 ALTER TABLE `bec_period_change_reason` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -51,4 +58,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-01-19 19:00:21
+-- Dump completed on 2017-01-19 19:00:22

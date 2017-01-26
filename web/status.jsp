@@ -1,21 +1,27 @@
 <%-- 
     Document   : status
     Created on : 5 Jan, 2017, 3:45:15 PM
-    Author     : Mahidhar reddy
+    Author     : Rohith reddy
 --%>
 
 <%@page import="java.text.DateFormat"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<jsp:useBean id="DS" class="dateop.DateSelection"/>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+       
+
         <SCRIPT type="text/javascript">
 	window.history.forward();
 	function noBack() { window.history.forward(); }
+        function print1() {
+        window.print();}
        
 </SCRIPT>
+    <!--<link rel="stylesheet" href="css/newcss1.css"/>-->
     </head>
     <body onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
          <%@ page import="java.util.*" %>
@@ -23,6 +29,20 @@
          <%@ page import="java.sql.*"%>
          <%@page import="java.text.SimpleDateFormat" %>
          <jsp:useBean id="DB" class="database.DatabaseCon"/>
+         <style>
+         .button {
+    display: block;
+    width: 115px;
+    height: 25px;
+    background: #333333;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    
+  
+    }</style>
+         <a class="button" href="Staff_classes.jsp">Back</a>
+         
      <% 
         
         Connection con=null;
@@ -30,13 +50,24 @@
         ResultSet rs=null,rs1=null;
         java.sql.PreparedStatement pst=null;
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-        java.util.Date today = Calendar.getInstance().getTime();
-        try{ 
+        String currDate = df.format(new java.util.Date());
+        if(session.getAttribute("currDate")!=null){
+            currDate=session.getAttribute("currDate").toString();
+        }
+        String SqlQuery="";
+        try{
             int StaffID=Integer.parseInt(session.getAttribute("StaffID").toString());
             String[] classDetails=session.getAttribute("classDetails").toString().split("_");
+            int Batch=0;
+            String BatchQuery=" and Batch=";
+            if(classDetails[0].contains("LAB")){
+                Batch=Integer.parseInt(session.getAttribute("Batch").toString());
+                BatchQuery+=session.getAttribute("Batch").toString();
+            }
+            
             String Class=classDetails[1];
             int ClassID=0;
-            out.print(Class);
+            out.print("<p style=\"color: #333; font-family: 'Muli', sans-serif; margin-bottom: 15px;\">"+classDetails[0]+"_"+Class+"</p><br/>");
             con = DB.getConnection();
             s=con.createStatement();
             int year=Integer.parseInt(Class.valueOf(Class.charAt(0)));
@@ -47,23 +78,48 @@
             String str=request.getParameter("nums");
             String[] rollnostr=str.split(",");
             ArrayList<Integer> periodlist=new ArrayList <Integer>();
-            out.print("Selected Periods:");
+            int[][] todayclass=(int[][])session.getAttribute("todayClasses");
+            out.print("<p style=\"color: #333; font-family: 'Muli', sans-serif; margin-bottom: 15px;\" >Selected Periods:");
             for (int i = 1; i < 10; i++) {
                 try{
                     periodlist.add(Integer.parseInt(request.getParameter("p"+i)));
+                    if(Batch==2){
+                        if(todayclass[1][i]!=StaffID){
+                            r=s.executeQuery("insert into bec_period_change_reason(Date, Reason, classDetails_id, staff_id) VALUES('"+DS.getSQLDate(currDate)+"','"+
+                                    request.getParameter("reason"+i)+"',"+ClassID+","+StaffID+")");
+                        }   
                     }
+                    else{
+                        if(todayclass[0][i]!=StaffID){
+                            try{
+                                
+                                s.executeUpdate("insert into bec_period_change_reason(Date, Reason, classDetails_id, staff_id,Period) VALUES('"+DS.getSQLDate(currDate)+"','"+request.getParameter("reason"+i)+"',"+ClassID+","+StaffID+","+i+")");
+                        
+                            }catch(Exception ex){
+                                out.print(ex.getMessage());
+                            }
+                        }
+                    }
+                }
                 catch(Exception ex){
                     
                 }
             }
             Integer[] periods = periodlist.toArray(new Integer[periodlist.size()]);
+            int affected=0;
             for (int i = 0; i < periods.length; i++) {
                 out.print(periods[i]+",");
-                    s.executeUpdate("update "+Class+" set p"+periods[i]+"="+StaffID+" where Date='"+df.format(today)+"'");
+                SqlQuery="update "+Class+" set p"+periods[i]+"="+StaffID+" where Date='"+DS.getSQLDate(currDate)+"'";
+                if(classDetails[0].contains("LAB")){
+                    SqlQuery+=BatchQuery;
+                }
+                affected+=s.executeUpdate(SqlQuery);
             }
-            out.println("<br/><b>Absents List:</b><br/>");
+            //out.print("________"+affected+"_______"+periods.length);
+            if(affected==periods.length){
+            out.println("<br/><b style=\"color: #179b77\">Absents List:</b><br/>");
             %>
-            <table border="1">
+            <table border="1"  class="table3"  style="border-color: #179b77">
                 <tr>
                     <th>Name</th>
                     <th>Reg_Num</th>
@@ -72,7 +128,11 @@
             <%
             for (int i = 0; i < rollnostr.length; i++) {
                 int rollNO=Integer.parseInt(rollnostr[i]);
-                rs=s.executeQuery("select * from bec_student where RollNo='"+rollNO+"' and classDetails_id="+ClassID);
+                SqlQuery="select * from bec_student where RollNo='"+rollNO+"' and classDetails_id="+ClassID;
+                if(classDetails[0].contains("LAB")){
+                    SqlQuery+=BatchQuery;
+                }
+                rs=s.executeQuery(SqlQuery);
                 while(rs.next()){
                     out.println("<tr><td>"+rs.getString(2)+"</td>");
                     String reg_num=rs.getString(3).trim();
@@ -81,27 +141,24 @@
                     Statement stmt=con.createStatement();
                     int update=0;
                     try{
-                        for (int j  = 0; j < periods.length; j++) {
-                            update=stmt.executeUpdate("update "+reg_num+" set p"+periods[j]+"=0 where Date='"+df.format(today)+"'");
-                            if(update==0){
-                                int insert=stmt.executeUpdate("insert into "+reg_num+"(Date,p"+periods[j]+") values('"+df.format(today)+"',0)");
-                            }
+                        //for (int j  = 0; j < periods.length; j++) {
+                        update=stmt.executeUpdate("update "+reg_num+" set `"+classDetails[0]+"`=`"+classDetails[0]+"`+0 where Date='"+DS.getSQLDate(currDate)+"'");
+                        if(update==0){
+                            int insert=stmt.executeUpdate("insert into "+reg_num+"(Date,`"+classDetails[0]+"`) values('"+DS.getSQLDate(currDate)+"',0)");
                         }
+                        //}
                     }
                     catch(Exception e){
-                        stmt.execute(DB.getCreateStmt(reg_num));
-                        stmt.execute("insert into "+reg_num+"(Date) values('"+df.format(today)+"')");
-                        for (int j  = 0; j < periods.length; j++) {
-                            stmt.executeUpdate("update "+reg_num+" set p"+periods[j]+"=0 where Date='"+df.format(today)+"'");
-                        }
+                        stmt.execute(DB.getCreateStmt(reg_num,ClassID));
+                        stmt.execute("insert into "+reg_num+"(Date,`"+classDetails[0]+"`) values('"+DS.getSQLDate(currDate)+"',0)");
                     }
-                    out.println("");
+                    //out.println("");
                 }
                 rs.close();
             }
             %>
-                </table><b>Present List:</b><br/>
-                <table border='1'>
+                </table><b style="color: #333; font-family: 'Muli', sans-serif; margin-bottom: 15px;">Present List:</b><br/>
+                <table border='1' class="table3" style="border-color: #179b77" >
                     <tr>
                         <th>Name</th>
                         <th>Reg_Num</th>
@@ -116,7 +173,11 @@
                     rollnos+=rollnostr[i];
                 int rollNO=Integer.parseInt(rollnostr[i]);
             }
-            rs=s.executeQuery("select * from bec_student where RollNo NOT IN("+rollnos+") and classDetails_id="+ClassID);
+            SqlQuery="select * from bec_student where RollNo NOT IN("+rollnos+") and classDetails_id="+ClassID;
+            if(classDetails[0].contains("LAB")){
+                SqlQuery+=BatchQuery;
+            }
+            rs=s.executeQuery(SqlQuery);
             while(rs.next()){
                 out.println("<tr><td>"+rs.getString(2)+"</td>");
                 String reg_num=rs.getString(3).trim();
@@ -125,23 +186,22 @@
                 Statement stmt=con.createStatement();
                 int update=0;
                 try{
-                    for (int j  = 0; j < periods.length; j++) {
-                        update=stmt.executeUpdate("update "+reg_num+" set p"+periods[j]+"=1 where Date='"+df.format(today)+"'");
-                        if(update==0){
-                         int insert=stmt.executeUpdate("insert into "+reg_num+"(Date,p"+periods[j]+") values('"+df.format(today)+"',1)");
-                        }
+                    update=stmt.executeUpdate("update "+reg_num+" set `"+classDetails[0]+"`=`"+classDetails[0]+"`+"+periods.length+" where Date='"+DS.getSQLDate(currDate)+"'");
+                    if(update==0){
+                     int insert=stmt.executeUpdate("insert into "+reg_num+"(Date,`"+classDetails[0]+"`) values('"+DS.getSQLDate(currDate)+"',"+periods.length+")");
                     }
                 }
                 catch(Exception e){
-                    stmt.execute(DB.getCreateStmt(reg_num));
-                    stmt.execute("insert into "+reg_num+"(Date) values('"+df.format(today)+"')");
-                for (int j  = 0; j < periods.length; j++) {
-                        stmt.executeUpdate("update "+reg_num+" set p"+periods[j]+"=1 where Date='"+df.format(today)+"'");
-                    }
+                    stmt.execute(DB.getCreateStmt(reg_num,ClassID));
+                    stmt.executeUpdate("insert into "+reg_num+"(Date,`"+classDetails[0]+"`) values('"+DS.getSQLDate(currDate)+"',"+periods.length+")");
                 }
             }
             rs.close();
             con.close();
+            }
+            else{
+                out.println("Already Updated");
+            }
         }
         catch(Exception ex){
             out.print(ex.getMessage());
@@ -149,6 +209,8 @@
             
         }
      %>
+     
      </table>
-    </body>
+     <input type="button" class="button" onclick="print1();" value="Print" style="background-color: #179b77"/>
+   
 </html>

@@ -18,13 +18,13 @@ import javax.crypto.spec.SecretKeySpec;
 public class Md5Encryption 
 {
     private static final String ALGORITHM = "md5";
-    private static final String DIGEST_STRING = "HG58YZ3CR9";
+    private static final String DIGEST_STRING = "PAVANROHITH";
     private static final String CHARSET_UTF_8 = "utf-8";
     private static final String SECRET_KEY_ALGORITHM = "DESede";
     private static final String TRANSFORMATION_PADDING = "DESede/CBC/PKCS5Padding";
 
     /* Encryption Method */
-    public static String encrypt(String message) throws Exception 
+    public static int encrypt(String message) throws Exception 
     { 
         final MessageDigest md = MessageDigest.getInstance(ALGORITHM); 
         final byte[] digestOfPassword = md.digest(DIGEST_STRING.getBytes(CHARSET_UTF_8)); 
@@ -40,8 +40,8 @@ public class Md5Encryption
 
         final byte[] plainTextBytes = message.getBytes(CHARSET_UTF_8); 
         final byte[] cipherText = cipher.doFinal(plainTextBytes); 
-
-        return new String(cipherText); 
+        //System.out.println(cipherText.hashCode());
+        return new String(cipherText).hashCode(); 
     } 
    
    /* Decryption Method 
@@ -62,12 +62,12 @@ public class Md5Encryption
     
     public static void main(String[] args) throws Exception { 
    
-        String text = "TEST STRING TO ENCRYP";//take input
-        String codedtext = new Md5Encryption().encrypt(text); 
+        String text = "Password";//take input
+       int codedtext = new Md5Encryption().encrypt(text); 
         //String decodedtext = new Md5Encryption().decrypt(codedtext); 
-        
+        System.out.println(codedtext);
 
-        System.out.println(codedtext.hashCode()); // this is a byte array, you'll just see a reference to an array 
+        System.out.println(new Md5Encryption().encrypt(text)); // this is a byte array, you'll just see a reference to an array 
         //System.out.println(decodedtext); // This correctly shows "TEST STRING TO ENCRYPT" 
    
     } 

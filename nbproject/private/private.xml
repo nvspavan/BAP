@@ -2,6 +2,24 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/F:/MY_PRO/BAP-BAP_9_1_16/web/CoReport.jsp</file>
+            <file>file:/F:/MY_PRO/BAP-BAP_9_1_16/web/UpdatePassword.jsp</file>
+            <file>file:/F:/MY_PRO/BAP-BAP_9_1_16/web/ClassReport.jsp</file>
+            <file>file:/F:/MY_PRO/BAP-BAP_9_1_16/web/ClassSummary.jsp</file>
+            <file>file:/F:/MY_PRO/BAP-BAP_9_1_16/src/java/dateop/DateSelection.java</file>
+            <file>file:/F:/MY_PRO/BAP-BAP_9_1_16/web/forgotPassword.jsp</file>
+            <file>file:/F:/MY_PRO/BAP-BAP_9_1_16/web/status.jsp</file>
+            <file>file:/F:/MY_PRO/BAP-BAP_9_1_16/web/index.jsp</file>
+            <file>file:/F:/MY_PRO/BAP-BAP_9_1_16/src/java/database/DatabaseCon.java</file>
+            <file>file:/F:/MY_PRO/BAP-BAP_9_1_16/src/java/Login/ForgotPasswordServlet.java</file>
+            <file>file:/F:/MY_PRO/BAP-BAP_9_1_16/src/java/BAP/Mail.java</file>
+            <file>file:/F:/MY_PRO/BAP-BAP_9_1_16/web/Report.jsp</file>
+            <file>file:/F:/MY_PRO/BAP-BAP_9_1_16/web/CheckReason.jsp</file>
+            <file>file:/F:/MY_PRO/BAP-BAP_9_1_16/web/Staff_classes.jsp</file>
+            <file>file:/F:/MY_PRO/BAP-BAP_9_1_16/web/sendMail.jsp</file>
+            <file>file:/F:/MY_PRO/BAP-BAP_9_1_16/src/java/Login/LoginValidation.java</file>
+            <file>file:/F:/MY_PRO/BAP-BAP_9_1_16/web/HOD_Classes.jsp</file>
+        </group>
     </open-files>
 </project-private>

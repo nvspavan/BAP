@@ -1,66 +1,14 @@
-<%-- 
-    Document   : ClassSummary.jsp
-    Created on : 8 Jan, 2017, 12:23:15 PM
-    Author     : Rohith Reddy
---%>
-
-<%@page import="java.util.AbstractList"%>
-<%@page import="java.util.Dictionary"%>
-<%@page import="java.util.Calendar"%>
-<%@page import="java.text.DateFormat"%>
+<%@page import="com.sun.javafx.scene.control.skin.VirtualFlow.ArrayLinkedList"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="java.text.SimpleDateFormat"%>
-<%@page import="java.util.Date"%>
-<%@page import="java.sql.ResultSet"%>
-<%@page import="java.sql.Statement"%>
-<%@page import="java.sql.Connection"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<jsp:useBean id="DB" class="database.DatabaseCon"/>
-<jsp:useBean id="BAP" class="BAP.BAPOP"/>
-<!DOCTYPE html>
-<%
-    String currClass="";
-    if(session.getAttribute("sltClass")==null){
-        response.sendRedirect("HOD_Classes.jsp");
-    }
-    else{
-        currClass=session.getAttribute("sltClass").toString();
-    }
-    Connection con=DB.getConnection();
-    Statement stmt=con.createStatement();
-    ResultSet rs=null;
-%>
-<html xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title><%=currClass%></title>
-        <SCRIPT type="text/javascript">
-                window.history.forward();
-                function noBack() { window.history.forward(); }
-        </SCRIPT>
-    </head>
-    <body onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
-        <a href="HOD_Classes.jsp">Back</a>
-        <%=currClass%>
-        <form action="ClassSummary.jsp" method="post">
-            
-        Percentage: <select name="percentage">
-            <option value="0">All</option>
-            <option value="90">&gt;90</option>
-            <option value="75">&gt;=75</option>
-            <option value="70">&lt;75 and &gt;=65</option>
-            <option value="65">below 65</option>
-        </select>
-        <input type="submit" value="submit"/>
-        </form> 
-        <table border='1'>
+
+<table class="table1" border='1'>
             <tr>
                 <th>Roll NO</th>
+                <th>Register No</th>
                 <th>Name</th>
+                <th>Phone Numbers</th>
                 <%
-                    float percentage=Float.valueOf((request.getParameter("percentage")==null)?"0":request.getParameter("percentage"));
-                    
                     List<String> subjects=new ArrayList<String>();
                     List<Integer> staffIDs=new ArrayList<Integer>();
                     rs=stmt.executeQuery("select * from bec_dealingclass join bec_class on bec_dealingclass.class_name_id=bec_class.id where bec_class.section='"+currClass.charAt(1)+"' and bec_class.year="+currClass.charAt(0));
@@ -72,11 +20,34 @@
                    int[][] total=new int[2][subjects.size()];
                    List<String> Dates=new ArrayList<String>();
                    ResultSet rsDate=null;
-                   rsDate=stmt.executeQuery("select DISTINCT Date from "+currClass.charAt(0)+"cse"+currClass.charAt(1));
+                   rsDate=stmt.executeQuery("select DISTINCT Date from "+currClass.charAt(0)+"cse"+currClass.charAt(1)+" where Date between '"+fromDate+"' and '"+toDate+"'");
                    while(rsDate.next()){
                        Dates.add(rsDate.getString(1));
                    }
-                   
+                    if(Dates.size()==0){
+                        session.setAttribute("noclasses", true);
+                        String loc="";
+                        if(session.getAttribute("StaffID")!=null){
+                                loc="CoReport.jsp";
+                                //response.sendRedirect("CoReport.jsp");
+                        }
+                        if(session.getAttribute("HODID")!=null){
+                                loc="Report.jsp";
+                                //response.sendRedirect("Report.jsp");
+                        }
+                        if(session.getAttribute("noclasses")!=null){
+                            %>
+                            <script type="text/javascript">
+                                window.alert("There are No classes in these Dates");
+                                //window.location.href = "";
+                            </script> 
+                            <%
+                                session.removeAttribute("noclasses");
+                            }
+                        response.sendRedirect(loc);
+                            
+                   }
+                    else{
                    for (String currDate : Dates) {
                        rs=stmt.executeQuery("SELECT * FROM "+currClass.charAt(0)+"cse"+currClass.charAt(1)+" where Date='"+currDate+"' order by Batch");
                        int Batchidx=0;
@@ -119,18 +90,20 @@
                        
                    }
                    int index=0;
-                   int Mytotal=0;
+                   int Gtotal1=0,Gtotal2=0;
                    for (String subject:subjects) {
                         out.print("<th>"+subject+"<br/>"+total[0][index]);
                         if(subject.contains("LAB")){
                             out.print("/"+total[1][index]);
                         }
                         out.print("</th>");
-                        Mytotal+=total[0][index];
+                        Gtotal1+=total[0][index];
+                        Gtotal2+=total[1][index];
                         index++;
                    }
+                   float percentage=Float.valueOf(request.getParameter("percentage"));
                 %>
-                <th>Total<br/><%=Mytotal%></th>
+                <th>Total<br/><%=Gtotal1%></th>
                 <th>Percentage<br/>(<%
                     if(percentage==70){
                         out.print("Between 75 and 65");
@@ -147,20 +120,25 @@
                 %> )</th>
             </tr>
                 <%
+                    
                    List<String> Names=new ArrayList<String>();
                    List<Integer> RollNos=new ArrayList<Integer>();
                    List<String> RegNos=new ArrayList<String>();
+                   List<String> Phonos=new ArrayList<String>();
+                   List<Integer> Batchs=new ArrayList<Integer>();
                    //List<String> Phonenos=new ArrayList<String>();
                    rs=stmt.executeQuery("SELECT * FROM bec.bec_student join bec.bec_class on bec_student.classDetails_id=bec_class.id where bec_class.section='"+currClass.charAt(1)+"' and bec_class.year="+currClass.charAt(0));
                    while(rs.next()){
                        Names.add(rs.getString(2));
                        RegNos.add(rs.getString(3));
                        RollNos.add(rs.getInt(4));
+                       Batchs.add(rs.getInt(6));
+                       Phonos.add(rs.getString(7));
                    } 
                    int[][] presentTotal=new int[RegNos.size()][subjects.size()];
                    int regIdx=0,subindx=0;
                    for(String regNum:RegNos){
-                       rs=stmt.executeQuery("select * from "+regNum);
+                       rs=stmt.executeQuery("select * from "+regNum+" where Date between '"+fromDate+"' and '"+toDate+"'");
                        while(rs.next()){
                            subindx=0;
                            //out.print("<tr><td>"+regNum+"</td>");
@@ -178,39 +156,30 @@
                    }
                    for (int i = 0; i < regIdx; i++) {
                        int mytotal=0;
-                       for (int j = 0; j < subindx; j++) {
+                        for (int j = 0; j < subindx; j++) {
                             mytotal+=presentTotal[i][j];
+                            //out.print("<td>"+presentTotal[i][j]+"</td>");
                        }
-                       float my_per=(mytotal/(float)Mytotal)*100;
-                       if(percentage==0||percentage==75||percentage==90){
+                        float my_per=(mytotal/(float)Gtotal1)*100;
+                        if(percentage==0||percentage==75||percentage==90){
                             if(my_per>=percentage){
-                                out.print("<tr><td>"+RegNos.get(i)+"</td><td>"+Names.get(i)+"</td>");   
+                                out.print("<tr><td>"+RollNos.get(i)+"</td><td>"+RegNos.get(i)+"</td><td>"+Names.get(i)+"</td><td>"+Phonos.get(i)+"</td>");
                                 for (int j = 0; j < subindx; j++) out.print("<td>"+presentTotal[i][j]+"</td>");
                                 out.print("<td>"+mytotal+"</td><td>"+my_per+"</td></tr>");
                             }
                         }
                         else if(percentage==70.0&&(my_per>=65&&my_per<75)){
-                            out.print("<tr><td>"+RegNos.get(i)+"</td><td>"+Names.get(i)+"</td>");   
+                            out.print("<tr><td>"+RollNos.get(i)+"</td><td>"+RegNos.get(i)+"</td><td>"+Names.get(i)+"</td><td>"+Phonos.get(i)+"</td>");
                             for (int j = 0; j < subindx; j++) out.print("<td>"+presentTotal[i][j]+"</td>");
                             out.print("<td>"+mytotal+"</td><td>"+my_per+"</td></tr>");
                         }
                         else if(percentage==65&&my_per<percentage){
-                            out.print("<tr><td>"+RegNos.get(i)+"</td><td>"+Names.get(i)+"</td>");   
+                            out.print("<tr><td>"+RollNos.get(i)+"</td><td>"+RegNos.get(i)+"</td><td>"+Names.get(i)+"</td><td>"+Phonos.get(i)+"</td>");
                             for (int j = 0; j < subindx; j++) out.print("<td>"+presentTotal[i][j]+"</td>");
                             out.print("<td>"+mytotal+"</td><td>"+my_per+"</td></tr>");
                             
                         }
-                       
-                       
-                       
-                       }
-                  
-                        
-                        
+                       }}
                 %>
             
         </table>
-
-        
-    </body>
-</html>

@@ -27,6 +27,7 @@ DROP TABLE IF EXISTS `cs3b_timetable`;
 CREATE TABLE `cs3b_timetable` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `Day` varchar(10) NOT NULL,
+  `Batch` int(11) NOT NULL,
   `P1` int(11) NOT NULL,
   `P2` int(11) NOT NULL,
   `P3` int(11) NOT NULL,
@@ -37,7 +38,7 @@ CREATE TABLE `cs3b_timetable` (
   `P8` int(11) NOT NULL,
   `P9` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -46,7 +47,7 @@ CREATE TABLE `cs3b_timetable` (
 
 LOCK TABLES `cs3b_timetable` WRITE;
 /*!40000 ALTER TABLE `cs3b_timetable` DISABLE KEYS */;
-INSERT INTO `cs3b_timetable` VALUES (1,'MON',6,15,5,21,9,12,0,0,0),(2,'TUE',15,21,6,5,12,9,0,0,0),(3,'WED',12,21,9,12,12,12,0,0,0),(4,'THU',5,15,12,15,0,0,0,0,0),(5,'FRI',15,5,12,9,6,21,0,0,0),(6,'SAT',5,5,5,21,6,15,0,0,0);
+INSERT INTO `cs3b_timetable` VALUES (1,'MON',1,6,15,5,21,9,12,0,0,0),(2,'TUE',1,15,21,6,5,12,9,0,0,0),(3,'WED',1,12,21,9,12,12,12,0,0,0),(4,'WED',1,12,21,9,5,5,5,0,0,0),(5,'THU',1,5,15,12,15,0,0,0,0,0),(6,'THU',1,5,15,12,12,0,0,0,0,0),(7,'FRI',1,15,5,12,9,6,21,0,0,0),(8,'SAT',1,5,5,5,21,6,15,0,0,0),(9,'SAT',1,15,15,15,21,6,15,0,0,0);
 /*!40000 ALTER TABLE `cs3b_timetable` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -59,4 +60,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-01-08 16:24:41
+-- Dump completed on 2017-01-19 19:00:20

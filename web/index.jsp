@@ -9,7 +9,7 @@
 <html >
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>BAP</title>
     <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
     <link rel="stylesheet" href="css/style.css">
@@ -82,7 +82,7 @@
           <!--<p class="forgot"><a href="#">Forgot Password?</a></p>-->
           
           <button class="button button-block" id="staff" name="staff"/>Log In</button>
-          
+          <a href="forgotPassword.jsp">Having trouble signing in?</a>
           </form>
 
         </div>

@@ -5,9 +5,13 @@
         <servlet-class>Login</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>NewServlet</servlet-name>
-        <servlet-class>abc.NewServlet</servlet-class>
+        <servlet-name>ForgotPasswordServlet</servlet-name>
+        <servlet-class>Login.ForgotPasswordServlet</servlet-class>
     </servlet>
+    <servlet-mapping>
+        <servlet-name>ForgotPasswordServlet</servlet-name>
+        <url-pattern>/ForgotPassword</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
