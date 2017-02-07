@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  *
- * @author Rohith Reddy
+ * @author Pavankumar
  */
 public class BAPOP {
     public List<Integer> getLabDetails(int[][] todayclasses,int StaffID){

@@ -1,17 +1,32 @@
 <%@page import="com.sun.javafx.scene.control.skin.VirtualFlow.ArrayLinkedList"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.Connection"%>
 
-<table class="table1" border='1'>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <link rel="stylesheet" href="css/newcss1.css"/>
+   
+</head>
+<table class="table2" cellspacing='0' border='1'>
             <tr>
                 <th>Roll NO</th>
                 <th>Register No</th>
                 <th>Name</th>
                 <th>Phone Numbers</th>
                 <%
+               
                     List<String> subjects=new ArrayList<String>();
                     List<Integer> staffIDs=new ArrayList<Integer>();
-                    rs=stmt.executeQuery("select * from bec_dealingclass join bec_class on bec_dealingclass.class_name_id=bec_class.id where bec_class.section='"+currClass.charAt(1)+"' and bec_class.year="+currClass.charAt(0));
+                   rs=stmt.executeQuery("select * from bec_dealingclass join bec_class on bec_dealingclass.class_name_id=bec_class.id where bec_class.section='"+currClass.charAt(1)+"' and bec_class.year="+currClass.charAt(0));
                     while(rs.next()){
                         staffIDs.add(rs.getInt(3));
                         subjects.add(rs.getString(4));

@@ -1,7 +1,7 @@
 <%-- 
     Document   : Report
     Created on : 18 Jan, 2017, 9:48:32 AM
-    Author     : Rohith Reddy
+    Author     : Pavankumar
 --%>
 
 <%@page import="java.util.List"%>
@@ -37,11 +37,31 @@
             window.print();}
 
         </SCRIPT>
+        <style>
+            .b3{
+   
+    background-color: #2388BF;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius:15px;
+    
+}
+        </style>
         
     </head>
     <body onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
-        <a href="Staff_classes.jsp">Back</a>
-        <a href="MissedClasses.jsp">Missed Classes</a>
+       <h6 style="font-size: 20px">Actions</h6>
+        <a class="b3" href="MissedClasses.jsp">Missed Classes</a>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        
+         <a class="b3" href="Staff_classes.jsp">Back</a>
     <%
         Connection con=DB.getConnection();
         Statement stmt=con.createStatement();
@@ -50,8 +70,9 @@
         String fromDate=DS.getSQLDateFromCal(request.getParameter("fromDate"));
         String toDate=DS.getSQLDateFromCal(request.getParameter("toDate"));
         
-    %>
-    <h1>Coordinating Class:<%=currClass%></h1>
+    %><hr/>
+    <h6 style="font-size: 20px">Reports</h6>
+    <p style="font-size: 20px">Coordinating Class:<%=currClass%></p>
     
     <form action="CoReport.jsp" method="post">
         Form Date:<input id="datepicker1" name="fromDate" value="<%=(request.getParameter("fromDate")==null)?new String():request.getParameter("fromDate")%>"/>
@@ -63,7 +84,7 @@
             <option value="70">&lt;75 and &gt;=65</option>
             <option value="65">below 65</option>
         </select>
-        <input type="submit" value="submit"/>
+        <input class="b3" type="submit" value="submit"/>
         <%
             if("POST".equalsIgnoreCase(request.getMethod()) && (request.getRequestURI() != null && request.getRequestURI().toString().equalsIgnoreCase("/BAP/CoReport.jsp")))
             if(request.getParameter("fromDate")==null){

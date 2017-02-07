@@ -1,7 +1,7 @@
 <%-- 
     Document   : ClassSummary.jsp
     Created on : 8 Jan, 2017, 12:23:15 PM
-    Author     : Rohith Reddy
+    Author     : Pavankumar
 --%>
 
 <%@page import="java.util.AbstractList"%>
@@ -34,28 +34,67 @@
 <html xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="css/newcss1.css"/>
         <title><%=currClass%></title>
         <SCRIPT type="text/javascript">
                 window.history.forward();
                 function noBack() { window.history.forward(); }
         </SCRIPT>
+        <style>
+            .b3{
+   
+    background-color: #2388BF;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius:15px;
+    
+}
+        </style>
     </head>
-    <body onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
-        <a href="HOD_Classes.jsp">Back</a>
-        <%=currClass%>
-        <form action="ClassSummary.jsp" method="post">
+    <body  onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
+        
+        <h2 style="font-size: 20px">Class Selected: <%=currClass%> 
+         &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+          &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+           &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+           &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</h2>
+         
+         <form  action="ClassSummary.jsp" method="post">
             
-        Percentage: <select name="percentage">
+            <p style="font-size: 20px">Percentage:<select name="percentage">
             <option value="0">All</option>
             <option value="90">&gt;90</option>
             <option value="75">&gt;=75</option>
             <option value="70">&lt;75 and &gt;=65</option>
             <option value="65">below 65</option>
-        </select>
-        <input type="submit" value="submit"/>
+                </select><p/>
+            <input class="b3" type="submit" value="submit"/>
+             &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+          &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+           &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+           &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+          &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+           &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+           &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+          &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+           &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+           &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+          &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+           &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+           &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+           <a href="HOD_Classes.jsp" class='b3'>Back</a>
+        <hr/>
         </form> 
-        <table border='1'>
-            <tr>
+         <table  class='table2' border='1' cellspacing='0'>
+            <tr >
                 <th>Roll NO</th>
                 <th>Name</th>
                 <%

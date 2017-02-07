@@ -1,7 +1,7 @@
 <%-- 
     Document   : Staff_classes
     Created on : 7 Jan, 2017, 11:28:32 AM
-    Author     : Rohith Reddy
+    Author     : Pavankumar
 --%>
 
 <%@page import="java.util.stream.IntStream"%>
@@ -29,15 +29,39 @@
   <link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900|RobotoDraft:400,100,300,500,700,900'>
 <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
 
-        <link rel="stylesheet" href="css/newcss.css">
+       
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
         <script type="text/javascript" src="js/checkboxreason.js"></script>
         <SCRIPT type="text/javascript">
             window.history.forward();
                 function noBack() { window.history.forward(); }
         </SCRIPT>
+        <style>
+            .b3{
+   
+    background-color: #80ff80;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius:15px;
+    
+}
+.b2{
+    border-radius: 15px 50px;
+    background: #7FD2FF;
+    padding: 20px; 
+    width: 200px;
+    height: 150px; 
+}
+
+
+        </style>
     </head>
-    <body onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="" class="module form-module">
+    <body style="background-image: url(images/b4.png)" onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="" >
         <div class="module form-module">
             <form id="form1" action="Staff_classes.jsp" method="post">
         <%  
@@ -69,11 +93,11 @@
                     currDate=session.getAttribute("currDate").toString();
             prevDate=DS.prevWorkingDay(todayDate);
         %>
-             Previous Day: <input type="submit" name="currDate" value="<%=prevDate%>"/>
-             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <input name="logout" type="submit" value="Logout"/><br/>
-           Today: <input type="submit" name="currDate" value="<%=todayDate%>"/><br/>
-           
+        <p style="font-size: 20px;color: #222222">Previous Day: <input class="b3" type="submit" name="currDate" value="<%=prevDate%>"/></p>
+            
+            
+            <p style="font-size: 20px;color: #222222"> Today: <input class="b3" type="submit" name="currDate" value="<%=todayDate%>"/><br/></p>
+           <input class="b3" name="logout" type="submit" value="Logout"/><br/><hr/>
         <%
             
             Date myDate = null;
@@ -84,7 +108,7 @@
                 myDate=null;
             }
             dayOfWeek=dWF.format(myDate);
-            out.print("Selected Date:"+dayOfWeek+" ");//Day of the Week
+            out.print("<p style=\"color: #222222;font-size=20px\">Selected Date:"+dayOfWeek+" ");//Day of the Week
             out.print(currDate+"<br/>");//Current Selected Date
             boolean Holiday=false;
             if(dayOfWeek.equalsIgnoreCase("sun")){
@@ -128,9 +152,9 @@
                         String classDet=rs.getInt(3)+rs.getString(4)+rs.getString(5);
                         ButtonIDs.add(classid+"_"+classDet);
                 %>
-        <li class="module form-module"><input type="submit" name="MyClasses" value="<%= sub+"_"+classDet %>"/></li>
+                <input class="b2" type="submit" name="MyClasses" value="<%= sub+"_"+classDet %>"/>
                 <%
-                        out.print("<br/><br/>");
+                       
                     }
                     rs.close();
                     if ( "POST".equalsIgnoreCase(request.getMethod()) && (request.getRequestURI() != null && request.getRequestURI().toString().equalsIgnoreCase("/BAP/Staff_classes.jsp"))) {
@@ -140,7 +164,7 @@
        <div class="module form-module">
         <div id="signup">   	
             <div class="module form-module">
-                Choose Period for section:
+                <p style="color: #222222">Choose Period for section:
                         <% 
                             String classDetails=request.getParameter("MyClasses");
                             String Class=classDetails.split("_")[1];
@@ -210,7 +234,7 @@
                                         out.println("checked");
                                 }
                             
-                        %>  id="input-confidencial<%=i%>" name="p<%=i%>" value = "<%=i%>"><label for="input-confidencial<%=i%>"><%=i%></label>
+%>  id="input-confidencial<%=i%>" name="p<%=i%>" value = "<%=i%>"><label for="input-confidencial<%=i%>"><%=i%></label>
                             <div id="reasondiv<%=i%>" style="display: none">
                                 <input type="text" id="reason<%=i%>" name="reason<%=i%>" placeholder="Reason for change"/>
                             </div>
@@ -267,10 +291,10 @@
                             </div>
         <br/><br/>
         <div class="module form-module">
-        <p > Please specify absenties list in comma sepeated values if no absenties fill with 0</p>
+        <p style="color: #222222;font-size: 20px"> Please specify absenties list in comma sepeated values if no absenties fill with 0</p>
            <textarea id="nums" name="nums"></textarea><br/>
            <br/>
-           <input id="btn" name="absentsSubmit" type="submit" title="submit">
+           <input class="b3" id="btn" name="absentsSubmit" type="submit" title="submit"><hr/>
           </div>
         </div>
       </div><!-- tab-content -->
@@ -289,7 +313,7 @@
                 Statement s=con.createStatement();
                 ResultSet rs=s.executeQuery("select * from bec_class where coordinator_id="+StaffID);
                 while(rs.next()){
-                    out.println("<p class='module form-module'>Coordinating Class:<a class='button' href='CoReport.jsp'>"+rs.getString(2)+"CSE"+rs.getString(3)+"</a></p>");
+                    out.println("<hr/><p style=\"colour=#222222\";ofnt-size=20px>Coordinating Class:<a class='b3' href='CoReport.jsp'>"+rs.getString(2)+"CSE"+rs.getString(3)+"</a></p>");
                     session.setAttribute("Class", rs.getString(2)+rs.getString(3));
 
                 }

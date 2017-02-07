@@ -1,7 +1,7 @@
 <%-- 
     Document   : forgotPassword
     Created on : 20 Jan, 2017, 10:47:26 AM
-    Author     : Rohith Reddy
+    Author     : Pavankumar
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

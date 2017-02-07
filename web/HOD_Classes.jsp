@@ -1,7 +1,7 @@
 <%-- 
     Document   : HOD_Classes
     Created on : 8 Jan, 2017, 10:24:29 AM
-    Author     : Rohith Reddy
+    Author     : Pavankumar
 --%>
 
 <%@page import="java.sql.ResultSet"%>
@@ -19,14 +19,20 @@
   <link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900|RobotoDraft:400,100,300,500,700,900'>
 <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
 
-        <link rel="stylesheet" href="css/newcss.css">
+       
         <SCRIPT type="text/javascript">
             window.history.forward();
             function noBack() { window.history.forward(); }
         </SCRIPT>
     </head>
-    <body class="module form-module" onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
+    <body  class="backs" onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
          <style>
+             .backs{
+               background-image: url(images/back2.png);
+               background-repeat: no-repeat;
+               background-size: 1400px 800px;
+             
+             }
                 .button {
     display: block;
     width: 115px;
@@ -38,12 +44,29 @@
     color: white;
     font-weight: bold;
 }
+.b2{
+    border-radius: 15px 50px;
+    background: #7FD2FF;
+    padding: 20px; 
+    width: 200px;
+    height: 150px; 
+}
+.b3{
+   
+    background-color: #2388BF;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius:15px;
+    
+}
             </style>
            
-        <a class="button" href="Report.jsp">Reports</a>
-        &nbsp;
-        <a class="button" href="CheckReason.jsp">Reasons</a>&nbsp;
-        <a class="button" href="Holidays.jsp">Add Holidays</a>
+       
         <% 
             if ( "POST".equalsIgnoreCase(request.getMethod()) && (request.getRequestURI() != null && request.getRequestURI().toString().equalsIgnoreCase("/BAP/HOD_classes.jsp"))) {
                 if(request.getParameter("logout")!=null){
@@ -59,11 +82,15 @@
                 response.sendRedirect("index.jsp");
             else{
         %>
-        <form method="post" action="HOD_Classes.jsp" class="module form-module">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <input style="background-color: #33b5e5" name="logout" type="submit" value="Logout"/>
+        <form method="post" action="HOD_Classes.jsp" >
+            <div>
+                <marquee> <h6 style="font-size: 40px;color: #7FD2FF">Welcome!You are logged in as HOD</h6></marquee><br/><br/>
+              
+                <input class="b3" name="logout" type="submit" value="Logout"/>
+                <hr/>
+            </div>
+            <h6 style="color: #4CAF50;font-size: 20px">Classes Available in CSE Department</h6><br/>   
+           
         
             <%
                 int HODID=Integer.parseInt(session.getAttribute("HODID").toString());
@@ -74,13 +101,21 @@
                     int id=rs.getInt(1);
                     String cls=rs.getInt(2)+rs.getString(3);
             %>
-            <input type="submit" style="background-color: #33b5e5" class="module form-module" name="classes" id="<%=id%>" value="<%=cls %>"/> 
+           
+            <input type="submit"  class="b2" name="classes" id="<%=id%>" value="<%=cls %>"/> &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;
             <%
                 }
                 rs.close();
                 }
 
             %>
+            <hr/>
+            <h6 style="color: #4CAF50;font-size: 20px">Other Actions</h6><br/>
+             <a class="b3" href="Report.jsp">Reports</a>
+             <a class="b3" href="CheckReason.jsp">Substitutions</a>
+             <a class="b3" href="Holidays.jsp">Add Holidays</a>
+        
         </form>
     </body>
 </html>

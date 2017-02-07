@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Rohith Reddy
+ * @author Pavankumar
  */
 public class DateSelection {
     public String prevWorkingDay(String toDate){

@@ -1,7 +1,7 @@
 <%-- 
     Document   : sendMail
     Created on : Apr 4, 2016, 8:52:44 AM
-    Author     : cse334
+    Author     : Pavankumar
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

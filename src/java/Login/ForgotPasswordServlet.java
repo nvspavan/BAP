@@ -22,7 +22,7 @@ import javax.servlet.http.HttpSession;
 //import org.apache.commons.lang3.RandomStringUtils;
 /**
  *
- * @author Rohith Reddy
+ * @author Pavankumar
  */
 public class ForgotPasswordServlet extends HttpServlet {
 

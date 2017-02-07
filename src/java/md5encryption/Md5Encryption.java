@@ -42,6 +42,8 @@ public class Md5Encryption
         final byte[] cipherText = cipher.doFinal(plainTextBytes); 
         //System.out.println(cipherText.hashCode());
         return new String(cipherText).hashCode(); 
+       
+        
     } 
    
    /* Decryption Method 

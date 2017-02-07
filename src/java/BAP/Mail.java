@@ -66,8 +66,8 @@ public class Mail {
     }
     private class SMTPAuthenticator extends javax.mail.Authenticator {
         public PasswordAuthentication getPasswordAuthentication() {
-            String username = "krishna.rohith.sai@gmail.com"; // specify your email id here (sender' s email id)
-            String password = "Rohith<24>Sai<31>&@"; // specify your password here
+            String username = "nvscience@gmail.com"; // specify your email id here (sender' s email id)
+            String password = "**********"; // specify your password here
             return new PasswordAuthentication(username, password);
         }
     }

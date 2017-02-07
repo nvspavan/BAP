@@ -1,7 +1,7 @@
 <%-- 
     Document   : UpdatePassword
     Created on : 20 Jan, 2017, 12:31:25 PM
-    Author     : Rohith Reddy
+    Author     : Pavankumar
 --%>
 
 <%@page import="java.sql.Statement"%>

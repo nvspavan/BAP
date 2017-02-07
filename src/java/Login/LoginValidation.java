@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 import md5encryption.Md5Encryption;
 /**
  *
- * @author Rohith Reddy
+ * @author Pavankumar
  */
 public class LoginValidation {
     public int LoginValidate(String username,String password,String login_as){
