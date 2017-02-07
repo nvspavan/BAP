@@ -31,6 +31,21 @@
     $("#datepicker2").datepicker();
   });
   </script>
+  <style>
+          .b3{
+   
+    background-color: #80ff80;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius:15px;
+    
+}
+  </style>
     </head>
     <body>
         <%
@@ -40,10 +55,12 @@
             else{
         %>
         <form action="Holidays.jsp" method="POST">
-            From Date:<input id="datepicker1" name="fromDate" />
-            To Date:<input id="datepicker2" name="toDate" /><br/>
-            Reason:<textarea name="Reason"></textarea>
-            <input type="submit" value="Add Holidays"/>
+             <h6 style="font-size: 20px">Date Selection</h6> 
+            From Date:<input id="datepicker1" name="fromDate" /><br/>
+            To Date:<input id="datepicker2" name="toDate" /><hr/>
+             <h6 style="font-size: 20px">Reason for Holiday(s)</h6> 
+            Reason:<textarea name="Reason"></textarea><br/>
+            <input class="b3" type="submit" value="Add Holidays"/><hr/>
         </form>            
         <%
                 if ( "POST".equalsIgnoreCase(request.getMethod()) && (request.getRequestURI() != null && request.getRequestURI().toString().equalsIgnoreCase("/BAP/Holidays.jsp")))
@@ -87,7 +104,7 @@
                 ResultSet rs=st.executeQuery("select * from bec_holidays");
                 out.print("Date(yyyy-mm-dd):Reason<br/>");
                 while(rs.next()){
-                    out.print(rs.getString(2)+":"+rs.getString(3)+"<br/>");
+                    out.print("<h6 style=\"font-size:20px\">"+rs.getString(2)+" is a &nbsp; "+rs.getString(3)+"<br/></h6>");
                 }
             }
         %>

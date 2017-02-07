@@ -59,11 +59,14 @@
         //out.print(str+"__"+request.getParameter("toDate"));
         rs=stmt.executeQuery("select year,SECTION from bec_class where Dept_Name_id="+HODID);
     %>
+    <h6 style="font-size: 20px">Date Selection</h6>
     <form   action="Report.jsp" method="post">
         <p style="color: #333; font-family: 'Muli', sans-serif; margin-bottom: 15px;" >
             From Date:<input id="datepicker1" placeholder="mm/dd/yyyy" name="fromDate" value="<%=(request.getParameter("fromDate")==null)?new String():request.getParameter("fromDate")%>"/></p><br/>
         <p style="color: #333; font-family: 'Muli', sans-serif; margin-bottom: 15px;" >
             To Date:<input id="datepicker2" name="toDate" placeholder="mm/dd/yyyy" value="<%=(request.getParameter("toDate")==null)?new String():request.getParameter("toDate")%>"/></p>
+        <hr/>
+       <h6 style="font-size: 20px">Section&Pencentage Selection</h6> 
     Section:<select style="color: #333; font-family: 'Muli', sans-serif; margin-bottom: 15px;" name="sltClass">
         <option value="Class">--Select--</option>
         <%
@@ -75,7 +78,7 @@
             }
         %>
     </select>
-        Percentage: <select name="percentage">
+         Percentage: <select name="percentage">
             <option value="0">All</option>
             <option value="90">&gt;90</option>
             <option value="75">&gt;=75</option>
@@ -93,10 +96,22 @@
     font-weight: bold;
     
   
-    }</style>
+    }         .b3{
+   
+    background-color: #80ff80;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius:15px;
+    
+}</style>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <input class="button" type="submit" value="submit"/>
+    <input class="b3" type="submit" value="submit"/>
     <%
         if("POST".equalsIgnoreCase(request.getMethod()) && (request.getRequestURI() != null && request.getRequestURI().toString().equalsIgnoreCase("/BAP/Report.jsp")))
         if(request.getParameter("fromDate")==null){
