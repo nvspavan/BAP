@@ -56,7 +56,7 @@
 }
         </style>
     </head>
-    <body  onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
+    <body style="background-color: #D1D0CE" onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
         
         <h2 style="font-size: 20px">Class Selected: <%=currClass%> 
          &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;

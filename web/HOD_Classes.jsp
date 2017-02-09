@@ -28,7 +28,8 @@
     <body  class="backs" onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
          <style>
              .backs{
-               background-image: url(images/back2.png);
+                 <%--background-image: url(images/back2.png);--%>
+                 background-color: #4C787E;
                background-repeat: no-repeat;
                background-size: 1400px 800px;
              
@@ -45,15 +46,18 @@
     font-weight: bold;
 }
 .b2{
-    border-radius: 15px 50px;
-    background: #7FD2FF;
+    border-radius: 15px 20px;
+    box-shadow: 10px 10px 10px #F8EEE7;
+    background: #43C6DB;
     padding: 20px; 
     width: 200px;
     height: 150px; 
+    margin-bottom:  20px;
 }
 .b3{
    
-    background-color: #2388BF;
+    background-color: #43BFC7;
+     box-shadow: 5px 5px 5px #F8EEE7;
     border: none;
     color: white;
     padding: 15px 32px;
@@ -84,12 +88,12 @@
         %>
         <form method="post" action="HOD_Classes.jsp" >
             <div>
-                <marquee> <h6 style="font-size: 40px;color: #7FD2FF">Welcome!You are logged in as HOD</h6></marquee><br/><br/>
+                <marquee> <h6 style="font-size: 40px;color: #C2B280">Welcome!You are logged in as HOD</h6></marquee><br/><br/>
               
-                <input class="b3" name="logout" type="submit" value="Logout"/>
+                <input class="b3" style="margin-left:75em" name="logout" type="submit" value="Logout"/>
                 <hr/>
             </div>
-            <h6 style="color: #4CAF50;font-size: 20px">Classes Available in CSE Department</h6><br/>   
+            <h6 style="color: #E7DFDD;font-size: 30px">Classes Available in CSE Department</h6><br/>   
            
         
             <%
@@ -111,10 +115,10 @@
 
             %>
             <hr/>
-            <h6 style="color: #4CAF50;font-size: 20px">Other Actions</h6><br/>
-             <a class="b3" href="Report.jsp">Reports</a>
-             <a class="b3" href="CheckReason.jsp">Substitutions</a>
-             <a class="b3" href="Holidays.jsp">Add Holidays</a>
+            <h6 style="color: #E7DFDD;font-size: 30px">Other Actions</h6><br/>
+            &nbsp;&nbsp; <a class="b3" href="Report.jsp">Reports</a>&nbsp;&nbsp;&nbsp;&nbsp;
+             <a class="b3" href="CheckReason.jsp">Substitutions</a>&nbsp;&nbsp;&nbsp;&nbsp;
+             <a class="b3" href="Holidays.jsp">Add Holidays</a>&nbsp;&nbsp;&nbsp;&nbsp;
         
         </form>
     </body>

@@ -21,7 +21,7 @@
         window.print();}
        
 </SCRIPT>
-    <!--<link rel="stylesheet" href="css/newcss1.css"/>-->
+    <link rel="stylesheet" href="css/newcss1.css"/>
     </head>
     <body onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
          <%@ page import="java.util.*" %>
@@ -29,6 +29,7 @@
          <%@ page import="java.sql.*"%>
          <%@page import="java.text.SimpleDateFormat" %>
          <jsp:useBean id="DB" class="database.DatabaseCon"/>
+         
          <style>
          .button {
     display: block;
@@ -119,7 +120,7 @@
             if(affected==periods.length){
             out.println("<br/><b style=\"color: #179b77\">Absents List:</b><br/>");
             %>
-            <table border="1"  class="table3"  style="border-color: #179b77">
+            <table border="1"  class="table2"  cellspacing="0">
                 <tr>
                     <th>Name</th>
                     <th>Reg_Num</th>
@@ -158,7 +159,7 @@
             }
             %>
                 </table><b style="color: #333; font-family: 'Muli', sans-serif; margin-bottom: 15px;">Present List:</b><br/>
-                <table border='1' class="table3" style="border-color: #179b77" >
+                <table border='1' class="table2" cellspacing="0"  >
                     <tr>
                         <th>Name</th>
                         <th>Reg_Num</th>

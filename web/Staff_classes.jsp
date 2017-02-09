@@ -37,9 +37,10 @@
                 function noBack() { window.history.forward(); }
         </SCRIPT>
         <style>
-            .b3{
+ .b3{
    
-    background-color: #80ff80;
+    background-color: #43BFC7;
+     box-shadow: 5px 5px 5px #F8EEE7;
     border: none;
     color: white;
     padding: 15px 32px;
@@ -50,18 +51,21 @@
     border-radius:15px;
     
 }
+
 .b2{
-    border-radius: 15px 50px;
-    background: #7FD2FF;
+    border-radius: 15px 20px;
+    box-shadow: 10px 10px 10px #F8EEE7;
+    background: #43C6DB;
     padding: 20px; 
     width: 200px;
     height: 150px; 
+    margin-bottom:  20px;
 }
 
 
         </style>
     </head>
-    <body style="background-image: url(images/b4.png)" onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="" >
+    <body style="background-color:#4C787E" onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="" >
         <div class="module form-module">
             <form id="form1" action="Staff_classes.jsp" method="post">
         <%  
@@ -93,10 +97,10 @@
                     currDate=session.getAttribute("currDate").toString();
             prevDate=DS.prevWorkingDay(todayDate);
         %>
-        <p style="font-size: 20px;color: #222222">Previous Day: <input class="b3" type="submit" name="currDate" value="<%=prevDate%>"/></p>
+        <p style="font-size: 20px;color: #FFFFFF">Previous Day: <input class="b3" type="submit" name="currDate" value="<%=prevDate%>"/></p>
             
             
-            <p style="font-size: 20px;color: #222222"> Today: <input class="b3" type="submit" name="currDate" value="<%=todayDate%>"/><br/></p>
+            <p style="font-size: 20px;color: #FFFFFF"> Today: <input class="b3" type="submit" name="currDate" value="<%=todayDate%>"/><br/></p>
            <input class="b3" name="logout" type="submit" value="Logout"/><br/><hr/>
         <%
             
@@ -108,7 +112,7 @@
                 myDate=null;
             }
             dayOfWeek=dWF.format(myDate);
-            out.print("<p style=\"color: #222222;font-size=20px\">Selected Date:"+dayOfWeek+" ");//Day of the Week
+            out.print("<p style=\"color: #FFFFFF;font-size=20px\">Selected Date:"+dayOfWeek+" ");//Day of the Week
             out.print(currDate+"<br/>");//Current Selected Date
             boolean Holiday=false;
             if(dayOfWeek.equalsIgnoreCase("sun")){
@@ -164,7 +168,7 @@
        <div class="module form-module">
         <div id="signup">   	
             <div class="module form-module">
-                <p style="color: #222222">Choose Period for section:
+                <p style="color: #FFFFFF">Choose Period for section:
                         <% 
                             String classDetails=request.getParameter("MyClasses");
                             String Class=classDetails.split("_")[1];
@@ -291,7 +295,7 @@
                             </div>
         <br/><br/>
         <div class="module form-module">
-        <p style="color: #222222;font-size: 20px"> Please specify absenties list in comma sepeated values if no absenties fill with 0</p>
+        <p style="color: #FFFFFF;font-size: 20px"> Please specify absenties list in comma sepeated values if no absenties fill with 0</p>
            <textarea id="nums" name="nums"></textarea><br/>
            <br/>
            <input class="b3" id="btn" name="absentsSubmit" type="submit" title="submit"><hr/>
@@ -313,7 +317,7 @@
                 Statement s=con.createStatement();
                 ResultSet rs=s.executeQuery("select * from bec_class where coordinator_id="+StaffID);
                 while(rs.next()){
-                    out.println("<hr/><p style=\"colour=#222222\";ofnt-size=20px>Coordinating Class:<a class='b3' href='CoReport.jsp'>"+rs.getString(2)+"CSE"+rs.getString(3)+"</a></p>");
+                    out.println("<hr/><p style=\"color:#FFFFFF;font-size:20px\">Coordinating Class:<a class='b3' href='CoReport.jsp'>"+rs.getString(2)+"CSE"+rs.getString(3)+"</a></p>");
                     session.setAttribute("Class", rs.getString(2)+rs.getString(3));
 
                 }

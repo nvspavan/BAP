@@ -25,10 +25,10 @@
             window.print();}
 
         </SCRIPT>
-        
+        <link rel="stylesheet" href="css/newcss1.css"/>
     </head>
     <body onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
-        <table border="1">
+        <table class="table2" border="1" cellspacing="0">
             
         <% 
             SimpleDateFormat dWF = new SimpleDateFormat("E");
@@ -38,7 +38,7 @@
             Statement s=con.createStatement();
             ResultSet rs=null;
             String currClass=session.getAttribute("Class").toString();
-            out.print(currClass);
+            out.print("<h6 style=\"font-size:20px\">Your Class is "+currClass+"</h6>");
             rs=s.executeQuery("select * from "+currClass.charAt(0)+"CSE"+currClass.charAt(1));
             /*int lab_count=0;//if there is a lab then count is 2 otherwise count=1
             while(rs.next()){
