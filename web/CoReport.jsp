@@ -54,14 +54,16 @@
         </style>
         
     </head>
-    <body onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
-       <h6 style="font-size: 20px">Actions</h6>
+    <body style="background-color: #D1D0CE" onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
+        <a class="b3" href="Staff_classes.jsp">Back</a>
+        <h3 style="font-size: 20px">Actions</h3>
+       
         <a class="b3" href="MissedClasses.jsp">Missed Classes</a>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         
-         <a class="b3" href="Staff_classes.jsp">Back</a>
+       
     <%
         Connection con=DB.getConnection();
         Statement stmt=con.createStatement();
@@ -71,7 +73,7 @@
         String toDate=DS.getSQLDateFromCal(request.getParameter("toDate"));
         
     %><hr/>
-    <h6 style="font-size: 20px">Reports</h6>
+    <h3 style="font-size: 20px">Reports</h3>
     <p style="font-size: 20px">Coordinating Class:<%=currClass%></p>
     
     <form action="CoReport.jsp" method="post">

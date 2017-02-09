@@ -97,11 +97,11 @@
                     currDate=session.getAttribute("currDate").toString();
             prevDate=DS.prevWorkingDay(todayDate);
         %>
-        <p style="font-size: 20px;color: #FFFFFF">Previous Day: <input class="b3" type="submit" name="currDate" value="<%=prevDate%>"/></p>
+        <p style="font-size: 20px;color: #FFFFFF">Previous Day: <input class="b3" type="submit" name="currDate" value="<%=prevDate%>"/></p><br/>
             
             
-            <p style="font-size: 20px;color: #FFFFFF"> Today: <input class="b3" type="submit" name="currDate" value="<%=todayDate%>"/><br/></p>
-           <input class="b3" name="logout" type="submit" value="Logout"/><br/><hr/>
+        <p style="font-size: 20px;color: #FFFFFF"> Today: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="b3" type="submit" name="currDate" value="<%=todayDate%>"/><br/></p>
+        <input class="b3" style="margin-left:75em" name="logout" type="submit" value="Logout"/><br/><hr/>
         <%
             
             Date myDate = null;
@@ -112,7 +112,7 @@
                 myDate=null;
             }
             dayOfWeek=dWF.format(myDate);
-            out.print("<p style=\"color: #FFFFFF;font-size=20px\">Selected Date:"+dayOfWeek+" ");//Day of the Week
+            out.print("<p style=\"color: #FFFFFF;font-size:20px\">Selected Date:"+dayOfWeek+" ");//Day of the Week
             out.print(currDate+"<br/>");//Current Selected Date
             boolean Holiday=false;
             if(dayOfWeek.equalsIgnoreCase("sun")){
@@ -145,7 +145,7 @@
                 else{
         %>
            <br/>
-           Please select section:
+           <h3 style="font-size:20px;color: #FFFFFF">Please select section:</h3><br/>
             <ul class="module form-module">
                 <%
                     ResultSet rs=st.executeQuery("SELECT d.class_name_id,d.Subject_Name,c.year,h.Dept_Name,c.section FROM bec.bec_dealingclass as d join bec.bec_class as c on d.class_name_id=c.id join bec.bec_hod as h on c.Dept_Name_id=h.id where d.staff_name_id="+StaffID+"");
@@ -156,7 +156,7 @@
                         String classDet=rs.getInt(3)+rs.getString(4)+rs.getString(5);
                         ButtonIDs.add(classid+"_"+classDet);
                 %>
-                <input class="b2" type="submit" name="MyClasses" value="<%= sub+"_"+classDet %>"/>
+                <input style="margin-left: 15px" class="b2" type="submit" name="MyClasses" value="<%= sub+"_"+classDet %>"/>
                 <%
                        
                     }
@@ -317,7 +317,7 @@
                 Statement s=con.createStatement();
                 ResultSet rs=s.executeQuery("select * from bec_class where coordinator_id="+StaffID);
                 while(rs.next()){
-                    out.println("<hr/><p style=\"color:#FFFFFF;font-size:20px\">Coordinating Class:<a class='b3' href='CoReport.jsp'>"+rs.getString(2)+"CSE"+rs.getString(3)+"</a></p>");
+                    out.println("<hr/><br/><br/><p style=\"color:#FFFFFF;font-size:20px\">Coordinating Class:  <a class='b3' href='CoReport.jsp'>"+rs.getString(2)+"CSE"+rs.getString(3)+"</a></p>");
                     session.setAttribute("Class", rs.getString(2)+rs.getString(3));
 
                 }

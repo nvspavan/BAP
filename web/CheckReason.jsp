@@ -32,24 +32,23 @@
         </SCRIPT>
          <style>
                 .button {
-    display: block;
-    width: 115px;
-    height: 25px;
-    background: #4E9CAF;
-    padding: 10px;
-    text-align: center;
-    border-radius: 5px;
+     background-color: #2388BF;
+    border: none;
     color: white;
-    font-weight: bold;
-
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius:15px;
 }
 
             </style>
         
     </head>
-    <body  onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
-        <a class="button" href="HOD_Classes.jsp">Back</a>
-        <table class="table2" border="1">
+    <body style="background-color: #D1D0CE" onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
+        <a class="button" href="HOD_Classes.jsp">Back</a><br/>
+        <table class="table2" border="1" cellspacing="0">
             <tr >
                 <th>ID</th>
                 <th>Date</th>

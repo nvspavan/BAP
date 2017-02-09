@@ -23,7 +23,7 @@
 </SCRIPT>
     <link rel="stylesheet" href="css/newcss1.css"/>
     </head>
-    <body onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
+    <body style="background-color: #D1D0CE" onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
          <%@ page import="java.util.*" %>
          <%@ page import="javax.sql.*" %>
          <%@ page import="java.sql.*"%>
@@ -32,13 +32,16 @@
          
          <style>
          .button {
-    display: block;
-    width: 115px;
-    height: 25px;
-    background: #333333;
-    border-radius: 5px;
+    background-color: #43BFC7;
+     box-shadow: 5px 5px 5px #F8EEE7;
+    border: none;
     color: white;
-    font-weight: bold;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius:15px;
     
   
     }</style>
@@ -68,7 +71,7 @@
             
             String Class=classDetails[1];
             int ClassID=0;
-            out.print("<p style=\"color: #333; font-family: 'Muli', sans-serif; margin-bottom: 15px;\">"+classDetails[0]+"_"+Class+"</p><br/>");
+            out.print("<p style=\"color: #333; font-family: 'Muli', sans-serif; margin-bottom: 15px;\">Selected Class"+classDetails[0]+"_"+Class+"</p><br/>");
             con = DB.getConnection();
             s=con.createStatement();
             int year=Integer.parseInt(Class.valueOf(Class.charAt(0)));
@@ -80,7 +83,8 @@
             String[] rollnostr=str.split(",");
             ArrayList<Integer> periodlist=new ArrayList <Integer>();
             int[][] todayclass=(int[][])session.getAttribute("todayClasses");
-            out.print("<p style=\"color: #333; font-family: 'Muli', sans-serif; margin-bottom: 15px;\" >Selected Periods:");
+            out.print("<p style=\"font-family: 'Muli', sans-serif; margin-bottom: 15px;\" >Selected Period(s):");
+           
             for (int i = 1; i < 10; i++) {
                 try{
                     periodlist.add(Integer.parseInt(request.getParameter("p"+i)));
@@ -118,7 +122,7 @@
             }
             //out.print("________"+affected+"_______"+periods.length);
             if(affected==periods.length){
-            out.println("<br/><b style=\"color: #179b77\">Absents List:</b><br/>");
+            out.println("<br/><b >Absents List:</b><br/>");
             %>
             <table border="1"  class="table2"  cellspacing="0">
                 <tr>
@@ -157,9 +161,9 @@
                 }
                 rs.close();
             }
-            %>
-                </table><b style="color: #333; font-family: 'Muli', sans-serif; margin-bottom: 15px;">Present List:</b><br/>
-                <table border='1' class="table2" cellspacing="0"  >
+            %><br/>
+                </table><b style="font-family: 'Muli', sans-serif; margin-bottom: 15px;">Present List:</b><br/>
+                <br/><table border='1' class="table2" cellspacing="0"  >
                     <tr>
                         <th>Name</th>
                         <th>Reg_Num</th>

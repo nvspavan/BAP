@@ -26,8 +26,25 @@
 
         </SCRIPT>
         <link rel="stylesheet" href="css/newcss1.css"/>
+        <style>
+            .b3{
+   
+    background-color: #43BFC7;
+     box-shadow: 5px 5px 5px #F8EEE7;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius:15px;
+    
+}
+        </style>
     </head>
-    <body onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
+    <body style="background-color: #D1D0CE" onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
+        <a class="b3" href="CoReport.jsp">Back</a>
         <table class="table2" border="1" cellspacing="0">
             
         <% 
@@ -38,7 +55,7 @@
             Statement s=con.createStatement();
             ResultSet rs=null;
             String currClass=session.getAttribute("Class").toString();
-            out.print("<h6 style=\"font-size:20px\">Your Class is "+currClass+"</h6>");
+            out.print("<h3 style=\"font-size:20px\">Your Class is "+currClass+"</h3>");
             rs=s.executeQuery("select * from "+currClass.charAt(0)+"CSE"+currClass.charAt(1));
             /*int lab_count=0;//if there is a lab then count is 2 otherwise count=1
             while(rs.next()){

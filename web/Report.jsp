@@ -40,7 +40,7 @@
        
 </SCRIPT>
     </head>
-    <body  onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
+    <body style="background-color: #D1D0CE" onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
         
     <%
         String currClass=request.getParameter("sltClass");
@@ -59,14 +59,15 @@
         //out.print(str+"__"+request.getParameter("toDate"));
         rs=stmt.executeQuery("select year,SECTION from bec_class where Dept_Name_id="+HODID);
     %>
-    <h6 style="font-size: 20px">Date Selection</h6>
+    <a class="b3" href="HOD_Classes.jsp">Back</a>
+    <h3 style="font-size: 20px">Date Selection</h3>
     <form   action="Report.jsp" method="post">
         <p style="color: #333; font-family: 'Muli', sans-serif; margin-bottom: 15px;" >
             From Date:<input id="datepicker1" placeholder="mm/dd/yyyy" name="fromDate" value="<%=(request.getParameter("fromDate")==null)?new String():request.getParameter("fromDate")%>"/></p><br/>
         <p style="color: #333; font-family: 'Muli', sans-serif; margin-bottom: 15px;" >
             To Date:<input id="datepicker2" name="toDate" placeholder="mm/dd/yyyy" value="<%=(request.getParameter("toDate")==null)?new String():request.getParameter("toDate")%>"/></p>
         <hr/>
-       <h6 style="font-size: 20px">Section&Pencentage Selection</h6> 
+       <h3 style="font-size: 20px">Section&Pencentage Selection</h3> 
     Section:<select style="color: #333; font-family: 'Muli', sans-serif; margin-bottom: 15px;" name="sltClass">
         <option value="Class">--Select--</option>
         <%
@@ -98,7 +99,7 @@
   
     }         .b3{
    
-    background-color: #80ff80;
+    background-color: #2388BF;
     border: none;
     color: white;
     padding: 15px 32px;

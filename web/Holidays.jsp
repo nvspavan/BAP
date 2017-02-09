@@ -34,7 +34,7 @@
   <style>
           .b3{
    
-    background-color: #80ff80;
+    background-color: #2388BF;
     border: none;
     color: white;
     padding: 15px 32px;
@@ -47,18 +47,19 @@
 }
   </style>
     </head>
-    <body>
+    <body style="background-color: #D1D0CE">
         <%
             if(session.getAttribute("HODID")==null){
                 response.sendRedirect("index.jsp");
             }
             else{
         %>
+        <a class="b3" href="HOD_Classes.jsp">Back</a><br/>
         <form action="Holidays.jsp" method="POST">
-             <h6 style="font-size: 20px">Date Selection</h6> 
-            From Date:<input id="datepicker1" name="fromDate" /><br/>
-            To Date:<input id="datepicker2" name="toDate" /><hr/>
-             <h6 style="font-size: 20px">Reason for Holiday(s)</h6> 
+             <h3 style="font-size: 20px">Date Selection</h3> 
+             <h2 style="font-size:20px"> From Date:</h2><input id="datepicker1" name="fromDate" /><br/>
+             <h2 style="font-size:20px">To Date:</h2><input id="datepicker2" name="toDate" /><hr/>
+             <h3 style="font-size: 20px">Reason for Holiday(s)</h3> 
             Reason:<textarea name="Reason"></textarea><br/>
             <input class="b3" type="submit" value="Add Holidays"/><hr/>
         </form>            
@@ -104,7 +105,7 @@
                 ResultSet rs=st.executeQuery("select * from bec_holidays");
                 out.print("Date(yyyy-mm-dd):Reason<br/>");
                 while(rs.next()){
-                    out.print("<h6 style=\"font-size:20px\">"+rs.getString(2)+" is a &nbsp; "+rs.getString(3)+"<br/></h6>");
+                    out.print("<h3 style=\"font-size:20px\">"+rs.getString(2)+" is a &nbsp; "+rs.getString(3)+"<br/></h3>");
                 }
             }
         %>
