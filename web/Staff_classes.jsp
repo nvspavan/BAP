@@ -67,6 +67,7 @@
     </head>
     <body style="background-color:#4C787E" onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="" >
         <div class="module form-module">
+            <img src="images/Screenshot (71).png" width="100%" height="250px"/>
             <form id="form1" action="Staff_classes.jsp" method="post">
         <%  
             int StaffID=0;

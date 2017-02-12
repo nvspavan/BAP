@@ -23,13 +23,63 @@
         <SCRIPT type="text/javascript">
             window.history.forward();
             function noBack() { window.history.forward(); }
+            function openNav() {
+    document.getElementById("mySidenav").style.display = "block";
+}
+
+function closeNav() {
+    document.getElementById("mySidenav").style.display = "none";
+}
         </SCRIPT>
     </head>
-    <body  class="backs" onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
+    <body  onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
          <style>
+             body {
+    font-family: "Lato", sans-serif;
+}
+
+.sidenav {
+    display: none;
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color:#99b3e6;
+    overflow-x: hidden;
+    padding-top: 60px;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s
+}
+
+.sidenav a:hover, .offcanvas a:focus{
+    color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+             <%--JDSBJWHBSB --%>
              .backs{
                  <%--background-image: url(images/back2.png);--%>
-                 background-color: #4C787E;
+                 background-color:#111 <%--#4C787E--%>;
                background-repeat: no-repeat;
                background-size: 1400px 800px;
              
@@ -47,8 +97,8 @@
 }
 .b2{
     border-radius: 15px 20px;
-    box-shadow: 10px 10px 10px #F8EEE7;
-    background: #43C6DB;
+    box-shadow: 10px 10px 10px <%--#F8EEE7--%>#ffcc99;
+    background:<%-- #43C6DB--%>#99b3e6 ;
     padding: 20px; 
     width: 200px;
     height: 150px; 
@@ -56,7 +106,7 @@
 }
 .b3{
    
-    background-color: #43BFC7;
+    background-color: <%--#43BFC7--%>#99b3e6;
      box-shadow: 5px 5px 5px #F8EEE7;
     border: none;
     color: white;
@@ -88,12 +138,25 @@
         %>
         <form method="post" action="HOD_Classes.jsp" >
             <div>
-                <marquee> <h6 style="font-size: 40px;color: #C2B280">Welcome!You are logged in as HOD</h6></marquee><br/><br/>
-              
+                <img src="images/Screenshot (71).png" width="100%" height="250px"/>
+                
+                <%--<marquee> <h6 style="font-size: 40px;color: #C2B280">Welcome!You are logged in as HOD</h6></marquee><br/><br/>
+                --%>
+                <div id="mySidenav" class="sidenav">
+                    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                    <a  href="Report.jsp">Reports</a>
+             <a  href="CheckReason.jsp">Substitutions</a>
+             <a  href="Holidays.jsp">Add Holidays</a>
+             <a href="index.jsp">Log in as Staff</a>
+               
+        
+                  </div>
+
+<span style="font-size:30px;cursor:pointer;color: #3366cc" onclick="openNav()">&#9776; Actions</span>
                 <input class="b3" style="margin-left:75em" name="logout" type="submit" value="Logout"/>
                 <hr/>
             </div>
-            <h6 style="color: #E7DFDD;font-size: 30px">Classes Available in CSE Department</h6><br/>   
+                <h6 style="color: <%--#E7DFDD--%>#193366;font-size: 30px">Classes Available in CSE Department</h6><br/>   
            
         
             <%
@@ -115,11 +178,12 @@
 
             %>
             <hr/>
+           <%--
             <h6 style="color: #E7DFDD;font-size: 30px">Other Actions</h6><br/>
             &nbsp;&nbsp; <a class="b3" href="Report.jsp">Reports</a>&nbsp;&nbsp;&nbsp;&nbsp;
              <a class="b3" href="CheckReason.jsp">Substitutions</a>&nbsp;&nbsp;&nbsp;&nbsp;
              <a class="b3" href="Holidays.jsp">Add Holidays</a>&nbsp;&nbsp;&nbsp;&nbsp;
-        
+           --%>
         </form>
     </body>
 </html>

@@ -47,7 +47,7 @@
         
     </head>
     <body style="background-color: #D1D0CE" onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
-        <a class="button" href="HOD_Classes.jsp">Back</a><br/>
+     <br/>   <a class="button" style="margin-left:70em" href="HOD_Classes.jsp">Back</a><br/>
         <table class="table2" border="1" cellspacing="0">
             <tr >
                 <th>ID</th>
