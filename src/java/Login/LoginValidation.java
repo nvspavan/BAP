@@ -19,7 +19,7 @@ import md5encryption.Md5Encryption;
  */
 public class LoginValidation {
     public int LoginValidate(String username,String password,String login_as){
-        int ID=0;
+        int ID=1;
         try {
             int pass=Md5Encryption.encrypt(password);
             try {
@@ -27,11 +27,7 @@ public class LoginValidation {
                 Connection con=db.getConnection();
                 Statement st=con.createStatement();
                 ResultSet rs=null;
-                if(login_as=="hod"){
-                     rs=st.executeQuery("select * from bec_"+login_as+" where Name='"+username+"'");
-                }
-                else
-                    rs=st.executeQuery("select staff_id from bec_"+login_as+"_login where username='"+username+"' and password='"+pass+"'");
+                rs=st.executeQuery("select "+login_as+"_id from bec_"+login_as+"_login where username='"+username+"' and password='"+pass+"'");
                 //ResultSet rs=st.executeQuery("select * from bec_"+login_as+" where Name='"+username+"'");
                 while(rs.next()){
                     ID=rs.getInt(1);

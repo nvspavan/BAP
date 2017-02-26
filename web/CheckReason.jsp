@@ -47,13 +47,14 @@
         
     </head>
     <body style="background-color: #D1D0CE" onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
-     <br/>   <a class="button" style="margin-left:70em" href="HOD_Classes.jsp">Back</a><br/>
+        <a class="button" href="HOD_Classes.jsp">Back</a><br/>
         <table class="table2" border="1" cellspacing="0">
             <tr >
                 <th>ID</th>
                 <th>Date</th>
                 <th>Class</th>
-                <th>Staff</th>
+                <th>Original Staff</th>
+                <th>Other Staff</th>
                 <th>Period</th>
                 <th>Reason</th>
             </tr>
@@ -61,8 +62,7 @@
         
             Connection con=DB.getConnection();
             Statement s=con.createStatement();
-            ResultSet rs=s.executeQuery("SELECT bec_period_change_reason.id,Date,year,section,Name,Reason,Period FROM bec.bec_period_change_reason join bec.bec_class on bec.bec_period_change_reason.classDetails_id=bec.bec_class.id"+
-" join bec_staff on bec_period_change_reason.staff_id=bec_staff.id");
+            ResultSet rs=s.executeQuery("SELECT bec_period_change_reason.id,Date,year,section,b.Name,c.Name,Reason,Period FROM bec.bec_period_change_reason join bec.bec_class on bec.bec_period_change_reason.classDetails_id=bec.bec_class.id join bec_staff as b on bec_period_change_reason.staff_id=b.id join bec_staff as c on bec_period_change_reason.other_staff_id=c.id");
             
             
             while(rs.next()){
@@ -70,8 +70,9 @@
                             "</td><td>"+rs.getString(2)+
                             "</td><td>"+rs.getString(3)+rs.getString(4)+
                             "</td><td>"+rs.getString(5)+
-                            "</td><td>"+rs.getString(7)+
-                            "</td><td>"+rs.getString(6)+"</td></tr>");
+                            "</td><td>"+rs.getString(6)+
+                            "</td><td>"+rs.getString(8)+
+                            "</td><td>"+rs.getString(7)+"</td></tr>");
                 
                 
             }

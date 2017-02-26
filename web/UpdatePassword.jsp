@@ -14,6 +14,22 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <style>
+                      .b3{
+   
+    background-color: #2388BF;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius:15px;
+    
+}
+
+        </style>
     </head>
     <body>
         <%

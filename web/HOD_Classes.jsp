@@ -104,6 +104,7 @@ function closeNav() {
     height: 150px; 
     margin-bottom:  20px;
 }
+
 .b3{
    
     background-color: <%--#43BFC7--%>#99b3e6;
@@ -148,6 +149,8 @@ function closeNav() {
              <a  href="CheckReason.jsp">Substitutions</a>
              <a  href="Holidays.jsp">Add Holidays</a>
              <a href="index.jsp">Log in as Staff</a>
+             <a href="ChangePassword.jsp">Change Password</a>
+             <a href="Modify.jsp">Modify-Attendance</a>
                
         
                   </div>
@@ -169,7 +172,7 @@ function closeNav() {
                     String cls=rs.getInt(2)+rs.getString(3);
             %>
            
-            <input type="submit"  class="b2" name="classes" id="<%=id%>" value="<%=cls %>"/> &nbsp;&nbsp;&nbsp;
+            <input type="submit" class="b2" name="classes" id="<%=id%>" value="<%=cls %>"/> &nbsp;&nbsp;&nbsp;
 &nbsp;&nbsp;
             <%
                 }
