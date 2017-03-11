@@ -50,10 +50,10 @@
     <body style="background-color: #D1D0CE">
         <form action="Modify.jsp" method="post">
             <h3 style="font-size:20px" > Regno:<input type="text" name="reg"/></h3><br/>
-            <input type="checkbox" name="changed" id="changed" onclick="change(this);"/>More
+           <%-- <input type="checkbox" name="changed" id="changed" onclick="change(this);"/>More
             <div id="more" style="display: none">
                 <input type="text" name="group"/>
-            </div>
+            </div>--%>
             <h3 style="font-size:20px" >Date:<input id="datepicker1" name="date"/></h3><br/>
             <h3 style="font-size:20px" >Subject:<input type="text" name="sub"/></h3><br/>
             <input type="submit" class="b3" value="Update"/>

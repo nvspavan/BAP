@@ -1,99 +1,37 @@
 <%-- 
-    Document   : index
-    Created on : 8 Jan, 2017, 11:12:51 AM
+    Document   : Home
+    Created on : Feb 26, 2017, 7:30:55 PM
     Author     : Pavankumar
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html >
-<head>
-    <meta charset="UTF-8">
-    <title>BAP</title>
-    <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-    <link rel="stylesheet" href="css/style.css">
-    <SCRIPT type="text/javascript">
-        window.history.forward();
-        function noBack() { window.history.forward(); }
-    </SCRIPT>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Home Page</title>
+        <style>
+            .b2{
+    border-radius: 15px 20px;
+    box-shadow: 10px 10px 10px <%--#F8EEE7--%>#ffcc99;
+    background:<%-- #43C6DB--%>#99b3e6 ;
+    padding: 20px; 
+    width: 200px;
+    height: 150px; 
+    margin-bottom:  20px;
+    margin-left:20px;
+}
+        </style>
     </head>
-    <body onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
-  <div class="form">
-      <%
-        if(session.getAttribute("HODID")!=null){
-            response.sendRedirect("HOD_Classes.jsp");
-        }
-        if(session.getAttribute("StaffID")!=null){
-            response.sendRedirect("Staff_classes.jsp");
-        }
-      %>
-      <ul class="tab-group">
-        <li class="tab active"><a href="#signup">Login As HOD </a></li>
-        <li class="tab"><a href="#login">Log In As Staff</a></li>
-      </ul>
-      
-      <div class="tab-content">
-        <div id="signup">   
-			<h1><img alt="bec logo" src = "images/emblum.jpg" height="20%" width="20%" /></h1>
-          <form action="Login.jsp" method="post">
-          
-            <div class="field-wrap">
-            <label>
-              HOD ID<span class="req">*</span>
-            </label>
-            <input type="text" required autocomplete="off" name="uname"/>
-          </div>
-          
-          <div class="field-wrap">
-            <label>
-              Password<span class="req">*</span>
-            </label>
-            <input type="password" name="pwd" required autocomplete="off"/>
-          </div>
-          
-          <!--<p class="forgot"><a href="#">Forgot Password?</a></p>-->
-          
-          <button class="button button-block" id= "hod" name="hod"/>Log In</button>
-          
-          </form>
-
-        </div>
-        
-        <div id="login">   
-          <h1><img src = "images/emblum.jpg" height="20%" width="20%"></img></h1>
-          
-          <form action="Login.jsp" method="post">
-          
-            <div class="field-wrap">
-            <label>
-              Staff ID<span class="req">*</span>
-            </label>
-            <input type="text"required autocomplete="off" name="uname"/>
-          </div>
-          
-          <div class="field-wrap">
-            <label>
-              Password<span class="req">*</span>
-            </label>
-            <input type="password" name="pwd" required autocomplete="off"/>
-          </div>
-          
-          <!--<p class="forgot"><a href="#">Forgot Password?</a></p>-->
-          
-          <button class="button button-block" id="staff" name="staff"/>Log In</button>
-          <a href="forgotPassword.jsp">Having trouble signing in?</a>
-          </form>
-
-        </div>
-        
-      </div><!-- tab-content -->
-      
-</div> <!-- /form -->
-  <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-
-  <script src="js/index.js"></script>
-
-</body>
+    <body>
+        <form action="Home.jsp" method="post">
+        <img src="images/Screenshot (71).png" width="100%" height="250px"/><br/><br/>
+        <input type="submit" class="b2" value="CSE"/>
+        <input type="submit" class="b2" value="ECE"/>
+        <input type="submit" class="b2" value="EEE"/>
+        <input type="submit" class="b2" value="ME"/>
+        <input type="submit" class="b2" value="CE"/>
+        <input type="submit" class="b2" value="CHE"/>
+        </form>
+    </body>
 </html>
-
